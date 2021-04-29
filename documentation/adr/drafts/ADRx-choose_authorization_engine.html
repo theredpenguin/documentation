@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Choose Authorization Engine :: Stackable Documentation</title>
+    <link rel="canonical" href="https://docs.stackable.tech/documentation/adr/drafts/ADRx-choose_authorization_engine.html">
+    <meta name="generator" content="Antora 2.2.0">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://docs.stackable.tech">Stackable Documentation</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="documentation" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../../index.html">Stackable Documentation</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">ADRs</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Current</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ADR001-choose_project_language.html">ADR001-choose_project_language.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ADR002-choose_repository_structure.html">ADR002-choose_repository_structure.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ADR003-choose_review_mechanism.html">ADR003-choose_review_mechanism.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ADR004-choose_agent_programming_language.html">ADR004-choose_agent_programming_language.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ADR005-systemd_unit_file_location.html">ADR005-systemd_unit_file_location.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ADR007-defined_reuse_of_k8s.html">ADR007-defined_reuse_of_k8s.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ADR008-decide_reuse_of_operators.html">ADR008-decide_reuse_of_operators.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ADR009-selector_support.html">ADR009-selector_support.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ADR010-command_pattern.html">ADR010-command_pattern.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../ADR011-directory_structure.html">ADR011-directory_structure.adoc</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Deprecated</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../deprecated/ADR006-choose_orchestrator_storage_backend.html">deprecated/ADR006-choose_orchestrator_storage_backend.adoc</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Drafts</span>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="ADRx-choose_authorization_engine.html">drafts/ADRx-choose_authorization_engine.adoc</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Stackable Documentation</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../../index.html">Stackable Documentation</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Stackable Documentation</a></li>
+    <li>ADRs</li>
+    <li>Drafts</li>
+    <li><a href="ADRx-choose_authorization_engine.html">drafts/ADRx-choose_authorization_engine.adoc</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/stackabletech/documentation/edit/antora/modules/adr/pages/drafts/ADRx-choose_authorization_engine.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Choose Authorization Engine</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Status: draft</p>
+</li>
+<li>
+<p>Deciders:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Florian Waibel</p>
+</li>
+<li>
+<p>Lars Francke</p>
+</li>
+<li>
+<p>Lukas Menzel</p>
+</li>
+<li>
+<p>Bernd Fondermann</p>
+</li>
+<li>
+<p>Oliver Hessel</p>
+</li>
+<li>
+<p>Sönke Liebau</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Date: xxx</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_context_and_problem_statement"><a class="anchor" href="#_context_and_problem_statement"></a>Context and Problem Statement</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We need some form of authorization engine both for the products that are deployed via our stack as well as for our internal apis.
+This engine should have the ability to express universal access controls, as it will need to be adapted to many different end products:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Stackable</p>
+</li>
+<li>
+<p>Hadoop</p>
+</li>
+<li>
+<p>Kafka</p>
+</li>
+<li>
+<p>Airflow</p>
+</li>
+<li>
+<p>Elasticsearch</p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Depending on which option is chosen, there is a second, implicit, decision that is taken as part of this record: whether or not to include an identity provider.
+Keycloak and Ranger both offer user management on top of authoriztion, whereas Open Policy Agent is purely an authorization engine.</p>
+</div>
+<div class="paragraph">
+<p>I&#8217;m not sure if we need to split this decision out into a separate ADR, but I suspect that it may make sense.
+If Open Policy Agent is chosen as part of this ADR, at some point we need to decide whether we also need an identity provider and if so, which one we should pick.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_decision_drivers_optional"><a class="anchor" href="#_decision_drivers_optional"></a>Decision Drivers &lt;!-- optional -&#8594;</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Availability of plugins for initial components or expected effort for implementation</p>
+</li>
+<li>
+<p>Flexibility of rule engine</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_considered_options"><a class="anchor" href="#_considered_options"></a>Considered Options</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Ranger</p>
+</li>
+<li>
+<p>Open Policy Agent</p>
+</li>
+<li>
+<p>Keycloak</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_decision_outcome"><a class="anchor" href="#_decision_outcome"></a>Decision Outcome</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Chosen option: "[option 1]", because [justification. e.g., only option, which meets k.o. criterion decision driver | which resolves force force | … | comes out best (see below)].</p>
+</div>
+<div class="sect2">
+<h3 id="_positive_consequences"><a class="anchor" href="#_positive_consequences"></a>Positive Consequences</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>[e.g., improvement of quality attribute satisfaction, follow-up decisions required, …]</p>
+</li>
+<li>
+<p>…</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_negative_consequences"><a class="anchor" href="#_negative_consequences"></a>Negative Consequences</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>[e.g., compromising quality attribute, follow-up decisions required, …]</p>
+</li>
+<li>
+<p>…</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pros_and_cons_of_the_options"><a class="anchor" href="#_pros_and_cons_of_the_options"></a>Pros and Cons of the Options</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_ranger"><a class="anchor" href="#_ranger"></a>Ranger</h3>
+<div class="paragraph">
+<p><a href="https://ranger.apache.org/">Ranger</a> is the de facto default authorization tool in the big data ecosystem.
+It offers existing integrations with a variety of tools and is used by the Cloudera offer as central access management component.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Good, because most necessary integrations already exist</p>
+</li>
+<li>
+<p>Good, existing know how applies</p>
+</li>
+<li>
+<p>Good, because it offers id provider functionality</p>
+</li>
+<li>
+<p>Bad, because adding new tools is complex</p>
+</li>
+<li>
+<p>Bad, because objects to authorize on need to be defined in code (see Open Policy Agent for comparison)</p>
+</li>
+<li>
+<p>Bad, because user synchronization mechanisms are fairly limited</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_open_policy_agent"><a class="anchor" href="#_open_policy_agent"></a>Open Policy Agent</h3>
+<div class="paragraph">
+<p><a href="https://www.openpolicyagent.org/">Open Policy Agent</a> is a universal authorization engine that has become popular in the Kubernetes (but not exclusively) environment lately.
+OPA defines ACLs in an abstract language called <a href="https://www.openpolicyagent.org/docs/latest/policy-language/">Rego</a> which allows keeping authorization logic in the ACL definition, instead of source code.
+This gives a much higher degree of abstraction and thus flexibility than having to hard-code the logic for every application.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Good, because relatively small effort to implement new tools</p>
+</li>
+<li>
+<p>Good, because very flexible system to define ACLs</p>
+</li>
+<li>
+<p>Bad, because no real HA concept</p>
+</li>
+<li>
+<p>Bad, because only one authorizer (Kafka) already implemented</p>
+</li>
+<li>
+<p>Bad, because would require additional identity provider</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_keycloak"><a class="anchor" href="#_keycloak"></a>Keycloak</h3>
+<div class="paragraph">
+<p><a href="https://www.keycloak.org/">Keycloak</a> is based on a Wildfly application server and probably the most fully featured alternative of the ones discussed.
+It allows integration with LDAP and AD, offers authorization, a clustered mode for high availability and much more.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Good, because gives a high degree of flexibility in adapting customers id solutions</p>
+</li>
+<li>
+<p>Good, because well established and widely used (GAIA-X, SCS)</p>
+</li>
+<li>
+<p>Bad, because no existing authorization plugins</p>
+</li>
+<li>
+<p>Bad, because objects to authorize on need to be defined in code (see Open Policy Agent for comparison)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_links"><a class="anchor" href="#_links"></a>Links</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>[Link type] [Link to ADR] &lt;!-- example: Refined by [ADR-0005](0005-example.md) -&#8594;</p>
+</li>
+<li>
+<p>… &lt;!-- numbers of links can vary -&#8594;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

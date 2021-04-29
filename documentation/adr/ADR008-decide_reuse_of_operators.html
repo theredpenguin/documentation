@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Allow Reuse of Existing Kubernetes Operators :: Stackable Documentation</title>
+    <link rel="canonical" href="https://docs.stackable.tech/documentation/adr/ADR008-decide_reuse_of_operators.html">
+    <meta name="generator" content="Antora 2.2.0">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://docs.stackable.tech">Stackable Documentation</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="documentation" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Stackable Documentation</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">ADRs</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Current</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR001-choose_project_language.html">ADR001-choose_project_language.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR002-choose_repository_structure.html">ADR002-choose_repository_structure.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR003-choose_review_mechanism.html">ADR003-choose_review_mechanism.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR004-choose_agent_programming_language.html">ADR004-choose_agent_programming_language.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR005-systemd_unit_file_location.html">ADR005-systemd_unit_file_location.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR007-defined_reuse_of_k8s.html">ADR007-defined_reuse_of_k8s.adoc</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="ADR008-decide_reuse_of_operators.html">ADR008-decide_reuse_of_operators.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR009-selector_support.html">ADR009-selector_support.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR010-command_pattern.html">ADR010-command_pattern.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR011-directory_structure.html">ADR011-directory_structure.adoc</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Deprecated</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="deprecated/ADR006-choose_orchestrator_storage_backend.html">deprecated/ADR006-choose_orchestrator_storage_backend.adoc</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Drafts</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="drafts/ADRx-choose_authorization_engine.html">drafts/ADRx-choose_authorization_engine.adoc</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Stackable Documentation</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Stackable Documentation</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Stackable Documentation</a></li>
+    <li>ADRs</li>
+    <li>Current</li>
+    <li><a href="ADR008-decide_reuse_of_operators.html">ADR008-decide_reuse_of_operators.adoc</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/stackabletech/documentation/edit/antora/modules/adr/pages/ADR008-decide_reuse_of_operators.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Allow Reuse of Existing Kubernetes Operators</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Status: approved</p>
+</li>
+<li>
+<p>Deciders:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Florian Waibel</p>
+</li>
+<li>
+<p>Lars Francke</p>
+</li>
+<li>
+<p>Oliver Hessel</p>
+</li>
+<li>
+<p>Sönke Liebau</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Date: 15.01.2021</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_context_and_problem_statement"><a class="anchor" href="#_context_and_problem_statement"></a>Context and Problem Statement</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For some of the tools we plan to integrate there are existing operators that deploy these tools on Kubernetes.
+Most notably these tools are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Spark</p>
+</li>
+<li>
+<p>Kafka</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Some implementation effort may be avoided by reusing these operators instead of recreating the tool-specific functionality that is already implemented.
+Since these operators are designed to work with Kubernetes and thus exclusively focused on containers some translation of data structures and processes would be necessary.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_decision_drivers"><a class="anchor" href="#_decision_drivers"></a>Decision Drivers</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Keeping the implementation effort as low as realistically possible</p>
+</li>
+<li>
+<p>Keeping compatibility with Kubernetes as far as possible to ease a later move towards Kubernetes deployments</p>
+</li>
+<li>
+<p>Avoid hard dependencies on external projects that may force us to fork in case they break compatibility with us</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_considered_options"><a class="anchor" href="#_considered_options"></a>Considered Options</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Allow reuse of Kubernetes operators (would need to be decided individually for every tool)</p>
+</li>
+<li>
+<p>Don&#8217;t reuse operators</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_decision_outcome"><a class="anchor" href="#_decision_outcome"></a>Decision Outcome</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Chosen option: "Don&#8217;t reuse operators", because the core value proposition of Stackable is that customers can get all tools from one place.
+This sort of implies that everything looks, feels and behaves the same, which would be very tough to ensure when depending on external projects that all behave differently.</p>
+</div>
+<div class="paragraph">
+<p>Even just looking at the two potential Kafka operators: Strimzi and Banzai, they choose substantially different approaches and adapting either one to our needs would have created substantial effort.</p>
+</div>
+<div class="sect2">
+<h3 id="_positive_consequences"><a class="anchor" href="#_positive_consequences"></a>Positive Consequences</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>All components deployed by us will adhere to a common standard, behavior and config set</p>
+</li>
+<li>
+<p>We can reuse core components for all operators</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Operator framework</p>
+</li>
+<li>
+<p>Config management framework</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_negative_consequences"><a class="anchor" href="#_negative_consequences"></a>Negative Consequences</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>A lot of effort and functionality has been implemented in existing operators, which we will effectively need to duplicate</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pros_and_cons_of_the_options"><a class="anchor" href="#_pros_and_cons_of_the_options"></a>Pros and Cons of the Options</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_allow_reuse_of_kubernetes_operators"><a class="anchor" href="#_allow_reuse_of_kubernetes_operators"></a>Allow reuse of Kubernetes operators</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Good, because it saves implementation effort</p>
+</li>
+<li>
+<p>Good, because this forces us to consider Kubernetes compatibility repeatedly</p>
+</li>
+<li>
+<p>Bad, because we create a dependency on another project that may at some point break compatibility</p>
+</li>
+<li>
+<p>Bad, because we need to adapt to interfaces that have been designed specifically with containers in mind</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dont_reuse_operators"><a class="anchor" href="#_dont_reuse_operators"></a>Don&#8217;t reuse operators</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Good, because it allows us to build our operators the way that works best for us</p>
+</li>
+<li>
+<p>Good, because we do not depend on the quality of external projects that may have implemented partial functionality (i.e. security)</p>
+</li>
+<li>
+<p>Bad, because we repeat work that has already been done</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_links"><a class="anchor" href="#_links"></a>Links</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://kubernetes.io/docs/concepts/extend-kubernetes/operator/">Operator pattern description</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

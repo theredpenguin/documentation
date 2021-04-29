@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Decide if Kubernetes Components Are to be Reused for Stackable :: Stackable Documentation</title>
+    <link rel="canonical" href="https://docs.stackable.tech/documentation/adr/ADR007-defined_reuse_of_k8s.html">
+    <meta name="generator" content="Antora 2.2.0">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://docs.stackable.tech">Stackable Documentation</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="documentation" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Stackable Documentation</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">ADRs</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Current</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR001-choose_project_language.html">ADR001-choose_project_language.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR002-choose_repository_structure.html">ADR002-choose_repository_structure.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR003-choose_review_mechanism.html">ADR003-choose_review_mechanism.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR004-choose_agent_programming_language.html">ADR004-choose_agent_programming_language.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR005-systemd_unit_file_location.html">ADR005-systemd_unit_file_location.adoc</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="ADR007-defined_reuse_of_k8s.html">ADR007-defined_reuse_of_k8s.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR008-decide_reuse_of_operators.html">ADR008-decide_reuse_of_operators.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR009-selector_support.html">ADR009-selector_support.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR010-command_pattern.html">ADR010-command_pattern.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR011-directory_structure.html">ADR011-directory_structure.adoc</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Deprecated</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="deprecated/ADR006-choose_orchestrator_storage_backend.html">deprecated/ADR006-choose_orchestrator_storage_backend.adoc</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Drafts</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="drafts/ADRx-choose_authorization_engine.html">drafts/ADRx-choose_authorization_engine.adoc</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Stackable Documentation</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Stackable Documentation</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Stackable Documentation</a></li>
+    <li>ADRs</li>
+    <li>Current</li>
+    <li><a href="ADR007-defined_reuse_of_k8s.html">ADR007-defined_reuse_of_k8s.adoc</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/stackabletech/documentation/edit/antora/modules/adr/pages/ADR007-defined_reuse_of_k8s.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Decide if Kubernetes Components Are to be Reused for Stackable</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Status: draft</p>
+</li>
+<li>
+<p>Deciders:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Florian Waibel</p>
+</li>
+<li>
+<p>Lars Francke</p>
+</li>
+<li>
+<p>Lukas Menzel</p>
+</li>
+<li>
+<p>Oliver Hessel</p>
+</li>
+<li>
+<p>Sönke Liebau</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Date: 27.08.2020</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_context_and_problem_statement"><a class="anchor" href="#_context_and_problem_statement"></a>Context and Problem Statement</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Stackable project will need at least two components in order to orchestrate the software that gets deployed.
+These components are the orchestrator and the agents that manage bare-metal (or virtual) servers.</p>
+</div>
+<div class="paragraph">
+<p>During previous design discussions it became quite clear that a lot of the issues that we need to for these components are very similar to issues that Kubernetes faced in the past - and solved already.
+Some examples of this are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Agents need to register with the orchestrator in a secure way</p>
+</li>
+<li>
+<p>The orchestrator needs a mechanism for operators to subscribe to data</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In theory, Kubernetes components are extensible enough that it should allow us to implement our components in a way that we can deploy them on top of an existing Kubernetes.
+This would save us some work, as we&#8217;d for example not have to reimplement the registration process for agents.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/images/adr7-architecture.png" alt="Architecture options">
+</div>
+</div>
+<div class="paragraph">
+<p>The image shows the two main options that we have identified during deliberations so far:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>shaded in red is the option of reusing Kubernetes components (please refer to <a href="#reuse-k8s">Reuse kube-apiserver and kubelet</a> for more details)</p>
+</li>
+<li>
+<p>shaded in green is the option of writing our own components (please refer to <a href="#from-scratch">Start from Scratch</a> for more details)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_decision_drivers"><a class="anchor" href="#_decision_drivers"></a>Decision Drivers</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Avoiding too tight coupling with Kubernetes development &amp; community</p>
+</li>
+<li>
+<p>Deployment effort for potential customers</p>
+</li>
+<li>
+<p>Development effort</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_considered_options"><a class="anchor" href="#_considered_options"></a>Considered Options</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Reuse kube-apiserver &amp; kubelet</p>
+</li>
+<li>
+<p>Reuse kube-apiserver</p>
+</li>
+<li>
+<p>Start from Scratch</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_decision_outcome"><a class="anchor" href="#_decision_outcome"></a>Decision Outcome</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Chosen option: "Reuse only kube-apiserver", because the amount of work to get a sufficient version of our orchestrator up and running is currently holding us back from achieving results that provide actual benefits to potential customers.</p>
+</div>
+<div class="paragraph">
+<p>While this increases our dependency on the Kubernetes project and potentially increases the deployment effort for customers a bit it has significant upsides as well.
+The main benefit is the fact that this will give as a battle-tested orchestrator right now, which we can use for our development.
+The Kubernetes api is very complex and reimplementing the pieces of the api-server that we need turned out to be more effort than expected.</p>
+</div>
+<div class="paragraph">
+<p>In the interest of reaching a MVP as early as possible we decided to push the final decision down the road a bit.</p>
+</div>
+<div class="paragraph">
+<p>This option is no decision <em>for</em> Kubernetes for good, but rather a decision for the first iteration of the product.
+By taking this step we are forcing ourselves to remain compatible with Kubernetes and keep the option open of implementing a limited version of the api-server later.</p>
+</div>
+<div class="sect2">
+<h3 id="_positive_consequences"><a class="anchor" href="#_positive_consequences"></a>Positive Consequences</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Much less effort implementing the orchestrator at this time</p>
+</li>
+<li>
+<p>No need to deploy a full Kubernetes stack, we can easily just package an api-server as part of our deployment</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_negative_consequences"><a class="anchor" href="#_negative_consequences"></a>Negative Consequences</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Relatively tight coupling with the kubernetes project</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pros_and_cons_of_the_options"><a class="anchor" href="#_pros_and_cons_of_the_options"></a>Pros and Cons of the Options</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="reuse-k8s"><a class="anchor" href="#reuse-k8s"></a>Reuse kube-apiserver and kubelet</h3>
+<div class="paragraph">
+<p>Stackable needs to deploy a server-client architecture where the decentralized agent receives commands from the central server to execute these.
+In order to create an infrastructure like this, there are some functions that need to be in place.
+Some examples for these functions are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Deploy TLS keys and certificates to agents</p>
+</li>
+<li>
+<p>Register agents with orchestrator</p>
+</li>
+<li>
+<p>Monitor agents for liveness</p>
+</li>
+<li>
+<p>Communication between components</p>
+</li>
+<li>
+<p>Tagging and selection of executing nodes</p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Most of these functions would be considered <em>boiler-plate</em> and are not exclusive to our intended use-case.
+Kubernetes has implemented a lot of this functionality already and we could try to reuse this by deploying our components on top of an existing Kubernetes infrastructure.</p>
+</div>
+<div class="paragraph">
+<p>The general idea would not be to fork Kubernetes and just reuse the code for our purposes, but rather to deploy the orchestrator as for example an operator in a vanilla Kubernetes cluster and deploying CRDs for our necessary data structures.
+This way the operator could subscribe to our resources and publish the necessary downstream structures that Stackable operators would then listen to.</p>
+</div>
+<div class="paragraph">
+<p>Thinking the concept a bit further we might even get away without an orchestrator as most functionality is taken over by the Kube apiserver already.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Good, because we do not need to reimplement existing functionality</p>
+</li>
+<li>
+<p>Bad, because we have to strictly adhere to Kubernetes structures for everything we do</p>
+</li>
+<li>
+<p>Bad, because we would need to marry our release cycles to the very short cycles of Kubernetes</p>
+</li>
+<li>
+<p>Bad, because for customers without an existing Kubernetes we would need to somehow provision a Kubernetes cluster</p>
+</li>
+<li>
+<p>Bad, because for some customers Kubernetes is not a technology that they want to invest in</p>
+</li>
+<li>
+<p>Bad, because we have to keep a very close eye on Kubernetes development to ensure we remain compatible with everything they do</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_reuse_only_kube_apiserver"><a class="anchor" href="#_reuse_only_kube_apiserver"></a>Reuse only kube-apiserver</h3>
+<div class="paragraph">
+<p>Since we aim to be api compatible with Kubernetes, we could use the api-server from Kubernetes as our central communications hub instead of a custom built orchestrator.
+As all components we plan to develop need to interface with this central server anyway this is an easy way of ensuring that we stay api-compatible every step of the way.</p>
+</div>
+<div class="paragraph">
+<p>Additionally this does not need a final decision, depending on how many Kubernetes features we end up using, it might still be an option at a later point in time to create our own apiserver in Rust und roll that out to customers who are not using Kubernetes.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Good, because ops and dev-persons could keep using their existing Kubernetes tools and know-how</p>
+</li>
+<li>
+<p>Good, because we save the initial effort of implementing a api-compatible apiserver</p>
+</li>
+<li>
+<p>Good, because it is a reversible decision that allows us to gather speed at this time</p>
+</li>
+<li>
+<p>Bad, because it may tempt us to end up using more and more kube-apiserver functionality which would make it harder and harder to write our own implementation later</p>
+</li>
+<li>
+<p>Bad, because this forces us to use etcd as storage backend, we were originally planning to rather go with a sql database</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="from-scratch"><a class="anchor" href="#from-scratch"></a>Start from Scratch</h3>
+<div class="paragraph">
+<p>We implement the orchestrator and the agent from scratch, instead of reusing any Kubernetes code.
+By doing this we gain the flexibility of designing our data structures and APIs as we see fit as well as decoupling us from Kubernetes release cycles.</p>
+</div>
+<div class="paragraph">
+<p>For this option, it is worth noting, that we will not simply ignore Kubernetes in everything we do, but still pay close attention not to break compatibility with Kubernetes.
+This is to ensure that a later move towards Kubernetes does not become overly complex.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Good, because this does not complicate deployments for customers without existing Kubernetes</p>
+</li>
+<li>
+<p>Good, because we don&#8217;t force customers to use Kubernetes</p>
+</li>
+<li>
+<p>Good, because we don&#8217;t need to adhere to the short Kubernetes release cycles</p>
+</li>
+<li>
+<p>Good, because we can design our solution independent of Kubernetes APIs and data structures</p>
+</li>
+<li>
+<p>Good, because we do not need to pay too close attention to the Kubernetes community with regards to breaking changes (for us, not for them)</p>
+</li>
+<li>
+<p>Bad, because we duplicate some effort that has already been done by the Kubernetes community</p>
+</li>
+<li>
+<p>Bad, because we potentially need to implement converters, if our structures differ from Kubernetes</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

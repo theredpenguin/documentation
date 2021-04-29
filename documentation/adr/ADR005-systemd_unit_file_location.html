@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Decide on handling and location of systemd unit files :: Stackable Documentation</title>
+    <link rel="canonical" href="https://docs.stackable.tech/documentation/adr/ADR005-systemd_unit_file_location.html">
+    <meta name="generator" content="Antora 2.2.0">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://docs.stackable.tech">Stackable Documentation</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="documentation" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Stackable Documentation</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">ADRs</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Current</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR001-choose_project_language.html">ADR001-choose_project_language.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR002-choose_repository_structure.html">ADR002-choose_repository_structure.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR003-choose_review_mechanism.html">ADR003-choose_review_mechanism.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR004-choose_agent_programming_language.html">ADR004-choose_agent_programming_language.adoc</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="ADR005-systemd_unit_file_location.html">ADR005-systemd_unit_file_location.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR007-defined_reuse_of_k8s.html">ADR007-defined_reuse_of_k8s.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR008-decide_reuse_of_operators.html">ADR008-decide_reuse_of_operators.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR009-selector_support.html">ADR009-selector_support.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR010-command_pattern.html">ADR010-command_pattern.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR011-directory_structure.html">ADR011-directory_structure.adoc</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Deprecated</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="deprecated/ADR006-choose_orchestrator_storage_backend.html">deprecated/ADR006-choose_orchestrator_storage_backend.adoc</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Drafts</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="drafts/ADRx-choose_authorization_engine.html">drafts/ADRx-choose_authorization_engine.adoc</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Stackable Documentation</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Stackable Documentation</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Stackable Documentation</a></li>
+    <li>ADRs</li>
+    <li>Current</li>
+    <li><a href="ADR005-systemd_unit_file_location.html">ADR005-systemd_unit_file_location.adoc</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/stackabletech/documentation/edit/antora/modules/adr/pages/ADR005-systemd_unit_file_location.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Decide on handling and location of systemd unit files</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Status: accepted</p>
+</li>
+<li>
+<p>Deciders:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Lars Francke</p>
+</li>
+<li>
+<p>Sönke Liebau</p>
+</li>
+<li>
+<p>Oliver Hessel</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Date: 07.01.2021</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_context_and_problem_statement"><a class="anchor" href="#_context_and_problem_statement"></a>Context and Problem Statement</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The agent will need to create systemd unit files for every service that it wants to be run.
+Systemd has a couple of directories where these files can be placed and offers ways of adding non-standard directories to that list.
+We need to decide where to put these files.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_decision_drivers"><a class="anchor" href="#_decision_drivers"></a>Decision Drivers</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Familiarity of admins with solution</p>
+</li>
+<li>
+<p>Added complexity</p>
+</li>
+<li>
+<p>Implementation effort</p>
+</li>
+<li>
+<p>Making cleanup of a server as easy as possible if Stackable stack is removed</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_considered_options"><a class="anchor" href="#_considered_options"></a>Considered Options</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Use $SYSTEMD_UNIT_PATH to globally add a new directory</p>
+</li>
+<li>
+<p>Symlink unit files to default location</p>
+</li>
+<li>
+<p>Create unit files in default location</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_decision_outcome"><a class="anchor" href="#_decision_outcome"></a>Decision Outcome</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Chosen option: "Create unit files in default location"</p>
+</div>
+<div class="paragraph">
+<p>We loose no functionality over any of the other options, but it is far easier to implement and has less added complexity for the sysadmins.</p>
+</div>
+<div class="paragraph">
+<p>We will put unit files in <em>/lib/systemd/system</em> which is the proper directory for unit files provided by installed packages.
+<em>/etc/systemd/system</em> is a directory with higher priority for user created units, not using this directory gives admins the option of creating a temporary override unit file here for testing/debugging/&#8230;&#8203; purposes.</p>
+</div>
+<div class="sect2">
+<h3 id="_positive_consequences"><a class="anchor" href="#_positive_consequences"></a>Positive Consequences</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Admins will find the unit files where they are used to finding them</p>
+</li>
+<li>
+<p>Implementation effort is low</p>
+</li>
+<li>
+<p>Least invasive and no risk of outdated files still being linked as current</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_negative_consequences"><a class="anchor" href="#_negative_consequences"></a>Negative Consequences</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>No versioning of unit files, as the current one will always be overwritten (this can be mitigated by keeping a copy of all unit files in our config dir)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pros_and_cons_of_the_options"><a class="anchor" href="#_pros_and_cons_of_the_options"></a>Pros and Cons of the Options</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_use_systemd_unit_path_to_globally_add_a_new_directory"><a class="anchor" href="#_use_systemd_unit_path_to_globally_add_a_new_directory"></a>Use $SYSTEMD_UNIT_PATH to globally add a new directory</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Good, because this would completely isolate our unit files from the rest of the system</p>
+</li>
+<li>
+<p>Bad, because this appears to be functionality used only for testing</p>
+</li>
+<li>
+<p>Bad, because setting this environment variable would need to be done very early during system startup, necessitating potentially dangerous changes to the server</p>
+</li>
+<li>
+<p>Bad, because this would create an unusual place to look for unit files that sysadmins are not aware of</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_symlink_unit_files_to_default_location"><a class="anchor" href="#_symlink_unit_files_to_default_location"></a>Symlink unit files to default location</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Good, because it would allow us to keep unit files in a central location</p>
+</li>
+<li>
+<p>Bad, because it adds a level of indirection that sysadmins are probably not used to</p>
+</li>
+<li>
+<p>Bad, because it creates the possibility of symlinks pointing at wrong unit files (if we version unit files)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_create_unit_files_in_default_location"><a class="anchor" href="#_create_unit_files_in_default_location"></a>Create unit files in default location</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Good, because it is known and expected behavior</p>
+</li>
+<li>
+<p>Good, because it is the quickest solution to implement</p>
+</li>
+<li>
+<p>Bad, because it is a little bit more invasive than alternatives</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

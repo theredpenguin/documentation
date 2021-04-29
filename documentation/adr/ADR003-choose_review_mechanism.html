@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Use RTC as Review Mechanism for Changes :: Stackable Documentation</title>
+    <link rel="canonical" href="https://docs.stackable.tech/documentation/adr/ADR003-choose_review_mechanism.html">
+    <meta name="generator" content="Antora 2.2.0">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://docs.stackable.tech">Stackable Documentation</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="documentation" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Stackable Documentation</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">ADRs</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Current</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR001-choose_project_language.html">ADR001-choose_project_language.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR002-choose_repository_structure.html">ADR002-choose_repository_structure.adoc</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="ADR003-choose_review_mechanism.html">ADR003-choose_review_mechanism.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR004-choose_agent_programming_language.html">ADR004-choose_agent_programming_language.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR005-systemd_unit_file_location.html">ADR005-systemd_unit_file_location.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR007-defined_reuse_of_k8s.html">ADR007-defined_reuse_of_k8s.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR008-decide_reuse_of_operators.html">ADR008-decide_reuse_of_operators.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR009-selector_support.html">ADR009-selector_support.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR010-command_pattern.html">ADR010-command_pattern.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ADR011-directory_structure.html">ADR011-directory_structure.adoc</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Deprecated</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="deprecated/ADR006-choose_orchestrator_storage_backend.html">deprecated/ADR006-choose_orchestrator_storage_backend.adoc</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Drafts</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="drafts/ADRx-choose_authorization_engine.html">drafts/ADRx-choose_authorization_engine.adoc</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Stackable Documentation</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Stackable Documentation</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Stackable Documentation</a></li>
+    <li>ADRs</li>
+    <li>Current</li>
+    <li><a href="ADR003-choose_review_mechanism.html">ADR003-choose_review_mechanism.adoc</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/stackabletech/documentation/edit/antora/modules/adr/pages/ADR003-choose_review_mechanism.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Use RTC as Review Mechanism for Changes</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Status: accepted</p>
+</li>
+<li>
+<p>Deciders:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Florian Waibel</p>
+</li>
+<li>
+<p>Lars Francke</p>
+</li>
+<li>
+<p>Lukas Menzel</p>
+</li>
+<li>
+<p>Oliver Hessel</p>
+</li>
+<li>
+<p>Sönke Liebau</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Date: 19.08.2020</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_context_and_problem_statement"><a class="anchor" href="#_context_and_problem_statement"></a>Context and Problem Statement</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We need a review process in place to ensure that any change that is committed into any of this projects repositories is properly reviewed.
+In order to do this there are two main principles that have been coined by the Apache Software Foundation:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Commit the change and then ensure that someone reviews it and commits necessary changes</p>
+</li>
+<li>
+<p>Create a pull request that is reviewed and changed before it gets merged into the main branch</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_decision_drivers"><a class="anchor" href="#_decision_drivers"></a>Decision Drivers</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Keep the commit history clean</p>
+</li>
+<li>
+<p>Ensure only reviewed code ever gets released</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_considered_options"><a class="anchor" href="#_considered_options"></a>Considered Options</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Review then commit</p>
+</li>
+<li>
+<p>Commit then review</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_decision_outcome"><a class="anchor" href="#_decision_outcome"></a>Decision Outcome</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Chosen option: "Review then commit", because it meets both decision drivers.</p>
+</div>
+<div class="sect2">
+<h3 id="_positive_consequences"><a class="anchor" href="#_positive_consequences"></a>Positive Consequences</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>It is easy to ensure that no unreviewed code gets into a release</p>
+</li>
+<li>
+<p>No need to track which code still needs to be reviewed</p>
+</li>
+<li>
+<p>The commit history can be kept much cleaner as all commits can be squashed when merging a pull request</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_negative_consequences"><a class="anchor" href="#_negative_consequences"></a>Negative Consequences</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Quick fixes may become harder, as reviewers need to be found before a fix can be merged</p>
+</li>
+<li>
+<p>Pull requests may go stale and cause a little effort to rebase before they can be merged</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pros_and_cons_of_the_options"><a class="anchor" href="#_pros_and_cons_of_the_options"></a>Pros and Cons of the Options</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_review_then_commit"><a class="anchor" href="#_review_then_commit"></a>Review then commit</h3>
+<div class="paragraph">
+<p>This option requires a full review and approval of all changes before they are commited to the development branch.
+Who and how many people need to approve a change will need to be defined in the contribution guidelines at a later time.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Good, because there is no need to keep track of unreviewed commits</p>
+</li>
+<li>
+<p>Good, because it is much easier to keep the commit history clean</p>
+</li>
+<li>
+<p>Good, because discussions during review are kept in the PR which keeps the repository clean</p>
+</li>
+<li>
+<p>Bad, because <em>quick fixes</em> can become harder</p>
+</li>
+<li>
+<p>Bad, because pull requests may go stale</p>
+</li>
+<li>
+<p>Bad, because a large number of old and inactive pull requests may accumulate</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_commit_then_review"><a class="anchor" href="#_commit_then_review"></a>Commit then Review</h3>
+<div class="paragraph">
+<p>With this process any committer is allowed to commit changes straight to the</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Good, because committing a change quickly is much easier</p>
+</li>
+<li>
+<p>Bad, because unreviewed commits could make it into a release or would need to be excluded</p>
+</li>
+<li>
+<p>Bad, because we need to keep track of whether or not a commit has been reviewed yet</p>
+</li>
+<li>
+<p>Bad, because changes during review would create additional commits that clutter up the commit history</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
