@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Use Multiple Repositories instead of one Large Repository :: Stackable Documentation</title>
-    <link rel="canonical" href="https://docs.stackable.tech/documentation/adr/ADR002-choose_repository_structure.html">
+    <title>Decide on handling and location of systemd unit files :: Stackable Documentation</title>
+    <link rel="canonical" href="https://docs.stackable.tech/home/adr/ADR005-systemd_unit_file_location.html">
     <meta name="generator" content="Antora 2.2.0">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -25,7 +25,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="documentation" data-version="master">
+<div class="nav-container" data-component="home" data-version="master">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -45,7 +45,7 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="ADR001-choose_project_language.html">ADR001-choose_project_language.adoc</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="3">
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="ADR002-choose_repository_structure.html">ADR002-choose_repository_structure.adoc</a>
   </li>
   <li class="nav-item" data-depth="3">
@@ -54,7 +54,7 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="ADR004-choose_agent_programming_language.html">ADR004-choose_agent_programming_language.adoc</a>
   </li>
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item is-current-page" data-depth="3">
     <a class="nav-link" href="ADR005-systemd_unit_file_location.html">ADR005-systemd_unit_file_location.adoc</a>
   </li>
   <li class="nav-item" data-depth="3">
@@ -121,23 +121,22 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="../index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Stackable Documentation</a></li>
     <li>ADRs</li>
     <li>Current</li>
-    <li><a href="ADR002-choose_repository_structure.html">ADR002-choose_repository_structure.adoc</a></li>
+    <li><a href="ADR005-systemd_unit_file_location.html">ADR005-systemd_unit_file_location.adoc</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/stackabletech/documentation/edit/antora/modules/adr/pages/ADR002-choose_repository_structure.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/stackabletech/documentation/edit/antora/modules/adr/pages/ADR005-systemd_unit_file_location.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Use Multiple Repositories instead of one Large Repository</h1>
+<h1 class="page">Decide on handling and location of systemd unit files</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="ulist">
@@ -150,25 +149,19 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Florian Waibel</p>
-</li>
-<li>
 <p>Lars Francke</p>
 </li>
 <li>
-<p>Lukas Menzel</p>
+<p>Sönke Liebau</p>
 </li>
 <li>
 <p>Oliver Hessel</p>
-</li>
-<li>
-<p>Sönke Liebau</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Date: 19.08.2020</p>
+<p>Date: 07.01.2021</p>
 </li>
 </ul>
 </div>
@@ -178,7 +171,9 @@
 <h2 id="_context_and_problem_statement"><a class="anchor" href="#_context_and_problem_statement"></a>Context and Problem Statement</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Should we use one large repository for all components of the project or structure this into multiple smaller repositories?</p>
+<p>The agent will need to create systemd unit files for every service that it wants to be run.
+Systemd has a couple of directories where these files can be placed and offers ways of adding non-standard directories to that list.
+We need to decide where to put these files.</p>
 </div>
 </div>
 </div>
@@ -188,13 +183,16 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Useability of repository structure</p>
+<p>Familiarity of admins with solution</p>
 </li>
 <li>
-<p>Impact on related infrastructure like CI / Testing / &#8230;&#8203;</p>
+<p>Added complexity</p>
 </li>
 <li>
-<p>Impact on release strategy</p>
+<p>Implementation effort</p>
+</li>
+<li>
+<p>Making cleanup of a server as easy as possible if Stackable stack is removed</p>
 </li>
 </ul>
 </div>
@@ -206,10 +204,13 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Single Repository</p>
+<p>Use $SYSTEMD_UNIT_PATH to globally add a new directory</p>
 </li>
 <li>
-<p>Multiple Repositories</p>
+<p>Symlink unit files to default location</p>
+</li>
+<li>
+<p>Create unit files in default location</p>
 </li>
 </ul>
 </div>
@@ -219,45 +220,27 @@
 <h2 id="_decision_outcome"><a class="anchor" href="#_decision_outcome"></a>Decision Outcome</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Chosen option: "Multiple Repositories", because it comes out best (see below)].</p>
+<p>Chosen option: "Create unit files in default location"</p>
 </div>
 <div class="paragraph">
-<p>How to split the components into repositories will be decided throughout the runtime of the project.</p>
+<p>We loose no functionality over any of the other options, but it is far easier to implement and has less added complexity for the sysadmins.</p>
 </div>
 <div class="paragraph">
-<p>Initially the following repositories were identified:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Orchestrator</p>
-</li>
-<li>
-<p>Agent</p>
-</li>
-<li>
-<p>ADR / Documentation</p>
-</li>
-<li>
-<p>Operators (most probably one repository per operator)</p>
-</li>
-<li>
-<p>Stackbit Sources (most probably one repository per product)</p>
-</li>
-</ul>
+<p>We will put unit files in <em>/lib/systemd/system</em> which is the proper directory for unit files provided by installed packages.
+<em>/etc/systemd/system</em> is a directory with higher priority for user created units, not using this directory gives admins the option of creating a temporary override unit file here for testing/debugging/&#8230;&#8203; purposes.</p>
 </div>
 <div class="sect2">
 <h3 id="_positive_consequences"><a class="anchor" href="#_positive_consequences"></a>Positive Consequences</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>The ability to separate changes to different modules</p>
+<p>Admins will find the unit files where they are used to finding them</p>
 </li>
 <li>
-<p>Better organization of individual modules</p>
+<p>Implementation effort is low</p>
 </li>
 <li>
-<p>Better separation of releases between modules</p>
+<p>Least invasive and no risk of outdated files still being linked as current</p>
 </li>
 </ul>
 </div>
@@ -267,10 +250,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>No single place to search for things, a little familiarity with the repository structure might be needed</p>
-</li>
-<li>
-<p>Potentially more effort when setting up CI and testing infrastructure</p>
+<p>No versioning of unit files, as the current one will always be overwritten (this can be mitigated by keeping a copy of all unit files in our config dir)</p>
 </li>
 </ul>
 </div>
@@ -281,75 +261,55 @@
 <h2 id="_pros_and_cons_of_the_options"><a class="anchor" href="#_pros_and_cons_of_the_options"></a>Pros and Cons of the Options</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_single_repository"><a class="anchor" href="#_single_repository"></a>Single Repository</h3>
+<h3 id="_use_systemd_unit_path_to_globally_add_a_new_directory"><a class="anchor" href="#_use_systemd_unit_path_to_globally_add_a_new_directory"></a>Use $SYSTEMD_UNIT_PATH to globally add a new directory</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>Good, because it makes implementing dependencies between modules easier</p>
+<p>Good, because this would completely isolate our unit files from the rest of the system</p>
 </li>
 <li>
-<p>Good, because it provides a single place to search for <em>things</em></p>
+<p>Bad, because this appears to be functionality used only for testing</p>
 </li>
 <li>
-<p>Bad, because it can become large and difficult to manage</p>
+<p>Bad, because setting this environment variable would need to be done very early during system startup, necessitating potentially dangerous changes to the server</p>
 </li>
 <li>
-<p>Bad, because it keeps things that should be loosely coupled in the same place which might promote tighter coupling</p>
-</li>
-<li>
-<p>Bad, because tagging a release of a component will unnecessarily include the rest of the repository</p>
-</li>
-<li>
-<p>Bad, because changes to a component may accidentally impact other components</p>
-</li>
-<li>
-<p>Bad, because the commit history is mixed for all components</p>
-</li>
-<li>
-<p>Bad, because a single commit may change multiple components making tracking these changes harder</p>
-</li>
-<li>
-<p>Bad, because the CI pipeline would need to identify the changed components to avoid triggering tests for all other components</p>
-</li>
-<li>
-<p>Bad, because clone times might be much higher</p>
+<p>Bad, because this would create an unusual place to look for unit files that sysadmins are not aware of</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_multiple_repositories"><a class="anchor" href="#_multiple_repositories"></a>Multiple Repositories</h3>
+<h3 id="_symlink_unit_files_to_default_location"><a class="anchor" href="#_symlink_unit_files_to_default_location"></a>Symlink unit files to default location</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>Good, because it keeps the individual repositories simpler</p>
+<p>Good, because it would allow us to keep unit files in a central location</p>
 </li>
 <li>
-<p>Good, because it allows proper separation of modules</p>
+<p>Bad, because it adds a level of indirection that sysadmins are probably not used to</p>
 </li>
 <li>
-<p>Good, because it allows proper tagging of releases</p>
-</li>
-<li>
-<p>Bad, because implementing dependent changes in separate components becomes harder</p>
-</li>
-<li>
-<p>Bad, because it makes finding individual pieces of code potentially harder if the repository is unknown</p>
+<p>Bad, because it creates the possibility of symlinks pointing at wrong unit files (if we version unit files)</p>
 </li>
 </ul>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_links"><a class="anchor" href="#_links"></a>Links</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_create_unit_files_in_default_location"><a class="anchor" href="#_create_unit_files_in_default_location"></a>Create unit files in default location</h3>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://medium.com/@johnclarke_82232/mono-or-multi-repo-6c3674142dfc">Mono- or Multi-repo?</a></p>
+<p>Good, because it is known and expected behavior</p>
+</li>
+<li>
+<p>Good, because it is the quickest solution to implement</p>
+</li>
+<li>
+<p>Bad, because it is a little bit more invasive than alternatives</p>
 </li>
 </ul>
+</div>
 </div>
 </div>
 </div>

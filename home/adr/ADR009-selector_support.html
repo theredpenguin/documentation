@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>ADR010: Expressing one-shot commands in a Kubernetes-native way :: Stackable Documentation</title>
-    <link rel="canonical" href="https://docs.stackable.tech/documentation/adr/ADR010-command_pattern.html">
+    <title>ADR009: Assigning Services to Nodes :: Stackable Documentation</title>
+    <link rel="canonical" href="https://docs.stackable.tech/home/adr/ADR009-selector_support.html">
     <meta name="generator" content="Antora 2.2.0">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -25,7 +25,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="documentation" data-version="master">
+<div class="nav-container" data-component="home" data-version="master">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -63,10 +63,10 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="ADR008-decide_reuse_of_operators.html">ADR008-decide_reuse_of_operators.adoc</a>
   </li>
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item is-current-page" data-depth="3">
     <a class="nav-link" href="ADR009-selector_support.html">ADR009-selector_support.adoc</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="3">
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="ADR010-command_pattern.html">ADR010-command_pattern.adoc</a>
   </li>
   <li class="nav-item" data-depth="3">
@@ -121,23 +121,22 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="../index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Stackable Documentation</a></li>
     <li>ADRs</li>
     <li>Current</li>
-    <li><a href="ADR010-command_pattern.html">ADR010-command_pattern.adoc</a></li>
+    <li><a href="ADR009-selector_support.html">ADR009-selector_support.adoc</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/stackabletech/documentation/edit/antora/modules/adr/pages/ADR010-command_pattern.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/stackabletech/documentation/edit/antora/modules/adr/pages/ADR009-selector_support.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">ADR010: Expressing one-shot commands in a Kubernetes-native way</h1>
+<h1 class="page">ADR009: Assigning Services to Nodes</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="ulist">
@@ -151,6 +150,12 @@
 <ul>
 <li>
 <p>Lars Francke</p>
+</li>
+<li>
+<p>Sönke Liebau</p>
+</li>
+<li>
+<p>Malte Sander</p>
 </li>
 </ul>
 </div>
@@ -166,15 +171,34 @@
 <h2 id="_context_and_problem_statement"><a class="anchor" href="#_context_and_problem_statement"></a>Context and Problem Statement</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Kubernetes follows a declarative model where a user describes the desired state of the world.
-There are some things that cannot be easily or naturally modeled in a declarative way.
-Some examples being: <code>restart</code>, <code>start</code>, <code>stop</code>, <code>repair</code>, <code>finalize upgrade</code>, etc.</p>
+<p>We need to decide on a syntax and feature set on how to assign services to nodes.
+For every process a user wants to run in the cluster we need to find a node to run it on.
+Usually users have an opinion which nodes make good candidates and we need to support a syntax that is flexible enough that users can select the nodes they want to target.</p>
 </div>
 <div class="paragraph">
-<p>We still need to support those actions.
-This ADR is about finding a way to do so.
-As can be seen in the <a href="https://github.com/kubernetes/kubernetes/issues/72637">linked issue</a> others are facing the same issue and various workarounds are in-use.
-Kubernetes offers no native way to achieve our goal.</p>
+<p>Our competition currently requires users to manually select all machines that software should be deployed to.
+Our goal is to be at least as good if not better.</p>
+</div>
+<div class="ulist">
+<div class="title">Problems</div>
+<ul>
+<li>
+<p>We want to support multiple instances of a service (or role) on a single node.</p>
+</li>
+<li>
+<p>We have to be able to target single instances with one-shot commands (e.g. restart this process)</p>
+</li>
+<li>
+<p>We need to be able to place instances in a very flexible way but also in a very strict way</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Sometimes there is an agreed upon fixed placement of services to nodes that must be adhered to</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -184,17 +208,21 @@ Kubernetes offers no native way to achieve our goal.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Have the Operators start a Web server that accepts requests for these actions</p>
-</li>
-<li>
-<p>Add CRDs for these kinds of actions</p>
+<p>Have users specify a list of nodeNames in their resources</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Have a single CRD: FooCommand which takes a string with the command (e.g. "restart")</p>
+<p>This would be the scenario customers of current Big Data distributions are used to</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>Have a CRD per command (e.g. FooRestart, FooStart)</p>
+<p>Reuse the <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/">"Label and Selector" syntax</a> from Kubernetes</p>
+<div class="ulist">
+<ul>
+<li>
+<p>See also <a href="https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/">Assigning Pods to Nodes</a></p>
 </li>
 </ul>
 </div>
@@ -207,73 +235,87 @@ Kubernetes offers no native way to achieve our goal.</p>
 <h2 id="_decision"><a class="anchor" href="#_decision"></a>Decision</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We decided to go with a single CRD per command.
-We decided against a web server (for now) because it&#8217;d mean we&#8217;d need to reimplement authentication and authorization from scratch and this&#8217;d need to be consistent with the way Kubernetes works.</p>
+<p>We decided to go with the Kubernetes way of using label selectors.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example:</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml"> leader:
+    selectors:
+      default:
+        selector:
+          matchLabels:
+            component: spark
+          matchExpressions:
+            - { key: tier, operator: In, values: [ cache ] }
+            - { key: environment, operator: NotIn, values: [ dev ] }
+        config:
+          cores: 1
+          memory: "1g"
+        instances: 3
+        instancesPerNode: 1
+      20core:
+        selector:
+          matchLabels:
+            component: spark
+            cores: 20
+          matchExpressions:
+            - { key: tier, operator: In, values: [ cache ] }
+            - { key: environment, operator: NotIn, values: [ dev ] }
+          config:
+            cores: 10
+            memory: "1g"
+          instances: 3
+          instancesPerNode: 2
+    config:</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Here we see that for a node <em>type</em> called <code>leader</code> we have an object with two top-level properties, one of them being <code>selectors</code>.
+<code>selectors</code> is again a map of names to objects.</p>
+</li>
+<li>
+<p>The names are chosen by the user and should describe the role group, often this will be just <code>default</code> or something similar but it allows overriding configuration per role group while inheriting parent-level config.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Unfortunately, Kubernetes doesn&#8217;t support arbitrary subresources for CRDs yet (only <code>scale</code> and <code>status</code> are supported)</p>
+<p>In summary, we decided that all our CRDs should follow a consistent pattern:</p>
 </div>
-<div class="ulist">
-<div class="title">Our implementation idea is as follows:</div>
-<ul>
-<li>
-<p>Create a CRD</p>
 <div class="ulist">
 <ul>
 <li>
-<p>It needs to have a reference to the parent resource (i.e. a name and a namespace)</p>
+<p>At the top level there is one property per role</p>
+</li>
+<li>
+<p>Under each role there can be one or more role groups (in a <code>selectors</code> property)</p>
+</li>
+<li>
+<p>Each role group has a single <code>selector</code> which is a Kubernetes <code>LabelSelector</code></p>
+</li>
+<li>
+<p>Each role group can have optional <code>instances</code> and <code>instancesPerNode</code> fields</p>
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p>Write an operator (<em>command operator</em>) which should be made generic and reusable</p>
-</li>
-<li>
-<p>This operator watches this new custom resource</p>
-<div class="ulist">
-<ul>
-<li>
-<p>For each command object it tries to find the referenced resource and sets the ownerReference of the command-CR to the one of the parent</p>
-</li>
-<li>
-<p>In theory users could do this themselves but it&#8217;s harder to use (i.e. having to find the uid)</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>The parent controller will be notified and during its reconcile it can get a list of all commands sorted by creationTimestamp</p>
-</li>
-<li>
-<p>It can then work on the command - tracking progress in the status - and also potentially update the command-CR</p>
-</li>
-</ul>
-</div>
-<div class="ulist">
-<div class="title">Open questions:</div>
-<ul>
-<li>
-<p>Should the command CR be deleted immediately after it has been completed?</p>
-</li>
-<li>
-<p>Should the command CR be used to track progress in addition to or instead of the parent resource?</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>This method also allows for (optional) auto-scaling should new nodes be added that match the selector.
+The details of how this can be implemented are not in scope for this ADR.</p>
 </div>
 <div class="sect2">
 <h3 id="_positive_consequences"><a class="anchor" href="#_positive_consequences"></a>Positive Consequences</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>We do not change the spec of the main objects so we can keep imperative actions out of it</p>
-<div class="ulist">
-<ul>
-<li>
-<p>This allows users to keep the spec in version control</p>
+<p>We have a consistent behavior across all Operators</p>
 </li>
-</ul>
-</div>
+<li>
+<p>It is better than what customers have today</p>
+</li>
+<li>
+<p>People already familiar with Kubernetes should feel right at home</p>
 </li>
 </ul>
 </div>
@@ -283,24 +325,14 @@ We decided against a web server (for now) because it&#8217;d mean we&#8217;d nee
 <div class="ulist">
 <ul>
 <li>
-<p>Implementation effort because each CRD needs a new controller</p>
+<p>It is more effort to implement than the alternatives</p>
+</li>
+<li>
+<p>It is harder to use for everyone who&#8217;s not used to the Kubernetes style of selecting nodes</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Can be mitigated somehow because the controllers should be pretty uniform</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Can be harder to use</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Instead of being able to issue a simple command like <code>spark restart</code> users first have to construct a proper YAML file and then use kubectl to apply it</p>
-</li>
-<li>
-<p>Can be mitigated with custom CLIs</p>
+<p>The old way of listing hosts can be relatively easily emulated (but should be explained in the docs)</p>
 </li>
 </ul>
 </div>
@@ -316,7 +348,10 @@ We decided against a web server (for now) because it&#8217;d mean we&#8217;d nee
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://github.com/kubernetes/kubernetes/issues/72637" class="bare">https://github.com/kubernetes/kubernetes/issues/72637</a></p>
+<p><a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/">"Label and Selector" syntax</a></p>
+</li>
+<li>
+<p><a href="https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/">Assigning Pods to Nodes</a></p>
 </li>
 </ul>
 </div>

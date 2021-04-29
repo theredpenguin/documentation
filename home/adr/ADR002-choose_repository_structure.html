@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Allow Reuse of Existing Kubernetes Operators :: Stackable Documentation</title>
-    <link rel="canonical" href="https://docs.stackable.tech/documentation/adr/ADR008-decide_reuse_of_operators.html">
+    <title>Use Multiple Repositories instead of one Large Repository :: Stackable Documentation</title>
+    <link rel="canonical" href="https://docs.stackable.tech/home/adr/ADR002-choose_repository_structure.html">
     <meta name="generator" content="Antora 2.2.0">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -25,7 +25,7 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="documentation" data-version="master">
+<div class="nav-container" data-component="home" data-version="master">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
@@ -45,7 +45,7 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="ADR001-choose_project_language.html">ADR001-choose_project_language.adoc</a>
   </li>
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item is-current-page" data-depth="3">
     <a class="nav-link" href="ADR002-choose_repository_structure.html">ADR002-choose_repository_structure.adoc</a>
   </li>
   <li class="nav-item" data-depth="3">
@@ -60,7 +60,7 @@
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="ADR007-defined_reuse_of_k8s.html">ADR007-defined_reuse_of_k8s.adoc</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="3">
+  <li class="nav-item" data-depth="3">
     <a class="nav-link" href="ADR008-decide_reuse_of_operators.html">ADR008-decide_reuse_of_operators.adoc</a>
   </li>
   <li class="nav-item" data-depth="3">
@@ -121,29 +121,28 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="../index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Stackable Documentation</a></li>
     <li>ADRs</li>
     <li>Current</li>
-    <li><a href="ADR008-decide_reuse_of_operators.html">ADR008-decide_reuse_of_operators.adoc</a></li>
+    <li><a href="ADR002-choose_repository_structure.html">ADR002-choose_repository_structure.adoc</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/stackabletech/documentation/edit/antora/modules/adr/pages/ADR008-decide_reuse_of_operators.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/stackabletech/documentation/edit/antora/modules/adr/pages/ADR002-choose_repository_structure.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Allow Reuse of Existing Kubernetes Operators</h1>
+<h1 class="page">Use Multiple Repositories instead of one Large Repository</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>Status: approved</p>
+<p>Status: accepted</p>
 </li>
 <li>
 <p>Deciders:</p>
@@ -156,6 +155,9 @@
 <p>Lars Francke</p>
 </li>
 <li>
+<p>Lukas Menzel</p>
+</li>
+<li>
 <p>Oliver Hessel</p>
 </li>
 <li>
@@ -165,7 +167,7 @@
 </div>
 </li>
 <li>
-<p>Date: 15.01.2021</p>
+<p>Date: 19.08.2020</p>
 </li>
 </ul>
 </div>
@@ -175,22 +177,7 @@
 <h2 id="_context_and_problem_statement"><a class="anchor" href="#_context_and_problem_statement"></a>Context and Problem Statement</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>For some of the tools we plan to integrate there are existing operators that deploy these tools on Kubernetes.
-Most notably these tools are:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Spark</p>
-</li>
-<li>
-<p>Kafka</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Some implementation effort may be avoided by reusing these operators instead of recreating the tool-specific functionality that is already implemented.
-Since these operators are designed to work with Kubernetes and thus exclusively focused on containers some translation of data structures and processes would be necessary.</p>
+<p>Should we use one large repository for all components of the project or structure this into multiple smaller repositories?</p>
 </div>
 </div>
 </div>
@@ -200,13 +187,13 @@ Since these operators are designed to work with Kubernetes and thus exclusively 
 <div class="ulist">
 <ul>
 <li>
-<p>Keeping the implementation effort as low as realistically possible</p>
+<p>Useability of repository structure</p>
 </li>
 <li>
-<p>Keeping compatibility with Kubernetes as far as possible to ease a later move towards Kubernetes deployments</p>
+<p>Impact on related infrastructure like CI / Testing / &#8230;&#8203;</p>
 </li>
 <li>
-<p>Avoid hard dependencies on external projects that may force us to fork in case they break compatibility with us</p>
+<p>Impact on release strategy</p>
 </li>
 </ul>
 </div>
@@ -218,10 +205,10 @@ Since these operators are designed to work with Kubernetes and thus exclusively 
 <div class="ulist">
 <ul>
 <li>
-<p>Allow reuse of Kubernetes operators (would need to be decided individually for every tool)</p>
+<p>Single Repository</p>
 </li>
 <li>
-<p>Don&#8217;t reuse operators</p>
+<p>Multiple Repositories</p>
 </li>
 </ul>
 </div>
@@ -231,31 +218,45 @@ Since these operators are designed to work with Kubernetes and thus exclusively 
 <h2 id="_decision_outcome"><a class="anchor" href="#_decision_outcome"></a>Decision Outcome</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Chosen option: "Don&#8217;t reuse operators", because the core value proposition of Stackable is that customers can get all tools from one place.
-This sort of implies that everything looks, feels and behaves the same, which would be very tough to ensure when depending on external projects that all behave differently.</p>
+<p>Chosen option: "Multiple Repositories", because it comes out best (see below)].</p>
 </div>
 <div class="paragraph">
-<p>Even just looking at the two potential Kafka operators: Strimzi and Banzai, they choose substantially different approaches and adapting either one to our needs would have created substantial effort.</p>
+<p>How to split the components into repositories will be decided throughout the runtime of the project.</p>
+</div>
+<div class="paragraph">
+<p>Initially the following repositories were identified:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Orchestrator</p>
+</li>
+<li>
+<p>Agent</p>
+</li>
+<li>
+<p>ADR / Documentation</p>
+</li>
+<li>
+<p>Operators (most probably one repository per operator)</p>
+</li>
+<li>
+<p>Stackbit Sources (most probably one repository per product)</p>
+</li>
+</ul>
 </div>
 <div class="sect2">
 <h3 id="_positive_consequences"><a class="anchor" href="#_positive_consequences"></a>Positive Consequences</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>All components deployed by us will adhere to a common standard, behavior and config set</p>
+<p>The ability to separate changes to different modules</p>
 </li>
 <li>
-<p>We can reuse core components for all operators</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Operator framework</p>
+<p>Better organization of individual modules</p>
 </li>
 <li>
-<p>Config management framework</p>
-</li>
-</ul>
-</div>
+<p>Better separation of releases between modules</p>
 </li>
 </ul>
 </div>
@@ -265,7 +266,10 @@ This sort of implies that everything looks, feels and behaves the same, which wo
 <div class="ulist">
 <ul>
 <li>
-<p>A lot of effort and functionality has been implemented in existing operators, which we will effectively need to duplicate</p>
+<p>No single place to search for things, a little familiarity with the repository structure might be needed</p>
+</li>
+<li>
+<p>Potentially more effort when setting up CI and testing infrastructure</p>
 </li>
 </ul>
 </div>
@@ -276,36 +280,60 @@ This sort of implies that everything looks, feels and behaves the same, which wo
 <h2 id="_pros_and_cons_of_the_options"><a class="anchor" href="#_pros_and_cons_of_the_options"></a>Pros and Cons of the Options</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_allow_reuse_of_kubernetes_operators"><a class="anchor" href="#_allow_reuse_of_kubernetes_operators"></a>Allow reuse of Kubernetes operators</h3>
+<h3 id="_single_repository"><a class="anchor" href="#_single_repository"></a>Single Repository</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>Good, because it saves implementation effort</p>
+<p>Good, because it makes implementing dependencies between modules easier</p>
 </li>
 <li>
-<p>Good, because this forces us to consider Kubernetes compatibility repeatedly</p>
+<p>Good, because it provides a single place to search for <em>things</em></p>
 </li>
 <li>
-<p>Bad, because we create a dependency on another project that may at some point break compatibility</p>
+<p>Bad, because it can become large and difficult to manage</p>
 </li>
 <li>
-<p>Bad, because we need to adapt to interfaces that have been designed specifically with containers in mind</p>
+<p>Bad, because it keeps things that should be loosely coupled in the same place which might promote tighter coupling</p>
+</li>
+<li>
+<p>Bad, because tagging a release of a component will unnecessarily include the rest of the repository</p>
+</li>
+<li>
+<p>Bad, because changes to a component may accidentally impact other components</p>
+</li>
+<li>
+<p>Bad, because the commit history is mixed for all components</p>
+</li>
+<li>
+<p>Bad, because a single commit may change multiple components making tracking these changes harder</p>
+</li>
+<li>
+<p>Bad, because the CI pipeline would need to identify the changed components to avoid triggering tests for all other components</p>
+</li>
+<li>
+<p>Bad, because clone times might be much higher</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_dont_reuse_operators"><a class="anchor" href="#_dont_reuse_operators"></a>Don&#8217;t reuse operators</h3>
+<h3 id="_multiple_repositories"><a class="anchor" href="#_multiple_repositories"></a>Multiple Repositories</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>Good, because it allows us to build our operators the way that works best for us</p>
+<p>Good, because it keeps the individual repositories simpler</p>
 </li>
 <li>
-<p>Good, because we do not depend on the quality of external projects that may have implemented partial functionality (i.e. security)</p>
+<p>Good, because it allows proper separation of modules</p>
 </li>
 <li>
-<p>Bad, because we repeat work that has already been done</p>
+<p>Good, because it allows proper tagging of releases</p>
+</li>
+<li>
+<p>Bad, because implementing dependent changes in separate components becomes harder</p>
+</li>
+<li>
+<p>Bad, because it makes finding individual pieces of code potentially harder if the repository is unknown</p>
 </li>
 </ul>
 </div>
@@ -318,7 +346,7 @@ This sort of implies that everything looks, feels and behaves the same, which wo
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://kubernetes.io/docs/concepts/extend-kubernetes/operator/">Operator pattern description</a></p>
+<p><a href="https://medium.com/@johnclarke_82232/mono-or-multi-repo-6c3674142dfc">Mono- or Multi-repo?</a></p>
 </li>
 </ul>
 </div>
