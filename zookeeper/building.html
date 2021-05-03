@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Building the Operator :: Stackable Documentation</title>
+    <link rel="canonical" href="https://docs.stackable.tech/zookeeper/building.html">
+    <meta name="generator" content="Antora 2.2.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+    <script>var uiRootPath = '../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://docs.stackable.tech">Stackable Documentation</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="zookeeper" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Stackable Operator for Apache ZooKeeper</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="building.html">building.adoc</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Stackable Operator for Apache ZooKeeper</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../home/index.html">Stackable Documentation</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../home/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="index.html">Stackable Operator for Apache ZooKeeper</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../home/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Stackable Operator for Apache ZooKeeper</a></li>
+    <li><a href="building.html">building.adoc</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/stackabletech/zookeeper-operator/edit/main/docs/modules/ROOT/pages/building.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Building the Operator</h1>
+<div class="paragraph">
+<p>This operator is written in Rust.
+It is developed against the latest Rust release (1.50.0-nightly at the time of writing).</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This requires Rust nightly due to the use of the <code>backtrace</code> feature.
+</td>
+</tr>
+</table>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>cargo build</pre>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+</footer>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
