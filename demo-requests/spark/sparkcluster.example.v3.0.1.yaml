@@ -1,0 +1,47 @@
+apiVersion: spark.stackable.tech/v1
+kind: SparkCluster
+metadata:
+  name: simple
+spec:
+  version: "3.0.1"
+  masters:
+    selectors:
+      default:
+        selector:
+          matchLabels:
+            kubernetes.io/hostname: main-1.stackable.demo
+        instances: 1
+        instancesPerNode: 1
+        config:
+          masterPort: 7078
+          masterWebUiPort: 8081
+  workers:
+    selectors:
+      normal-workers:
+        selector:
+          matchExpressions:
+            - operator: In
+              key: kubernetes.io/hostname
+              values:
+                - worker-1.stackable.demo
+                - worker-2.stackable.demo
+                - worker-3.stackable.demo
+                - worker-4.stackable.demo
+        instances: 1
+        instancesPerNode: 1
+        config:
+          cores: 1
+          memory: "1g"
+          workerPort: 3031
+          workerWebUiPort: 8083
+  historyServers:
+    selectors:
+      default:
+        selector:
+          matchLabels:
+            kubernetes.io/hostname: worker-5.stackable.demo
+        instances: 1
+        instancesPerNode: 1
+        config:
+          historyWebUiPort: 18081
+
