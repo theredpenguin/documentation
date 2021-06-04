@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Stackable Operator for Apache ZooKeeper :: Stackable Documentation</title>
-    <link rel="canonical" href="https://docs.stackable.tech/zookeeper/index.html">
+    <title>Stackable Agent :: Stackable Documentation</title>
+    <link rel="canonical" href="https://docs.stackable.tech/agent/index.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../_/css/site.css">
     <script>var uiRootPath = '../_'</script>
@@ -25,17 +25,29 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="zookeeper" data-version="master">
+<div class="nav-container" data-component="agent" data-version="master">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="index.html">Stackable Operator for Apache ZooKeeper</a></h3>
+    <h3 class="title"><a href="index.html">Stackable Agent</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="building.html">Building the Operator</a>
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Installation</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="installation/building.html">Building from source</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="installation/binaries.html">Binaries &amp; Packages</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="configuration.html">Configuration</a>
   </li>
 </ul>
   </li>
@@ -44,15 +56,15 @@
 </div>
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
-    <span class="title">Stackable Operator for Apache ZooKeeper</span>
+    <span class="title">Stackable Agent</span>
     <span class="version">master</span>
   </div>
   <ul class="components">
-    <li class="component">
-      <a class="title" href="../agent/index.html">Stackable Agent</a>
+    <li class="component is-current">
+      <a class="title" href="index.html">Stackable Agent</a>
       <ul class="versions">
-        <li class="version is-latest">
-          <a href="../agent/index.html">master</a>
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
         </li>
       </ul>
     </li>
@@ -96,11 +108,11 @@
         </li>
       </ul>
     </li>
-    <li class="component is-current">
-      <a class="title" href="index.html">Stackable Operator for Apache ZooKeeper</a>
+    <li class="component">
+      <a class="title" href="../zookeeper/index.html">Stackable Operator for Apache ZooKeeper</a>
       <ul class="versions">
-        <li class="version is-current is-latest">
-          <a href="index.html">master</a>
+        <li class="version is-latest">
+          <a href="../zookeeper/index.html">master</a>
         </li>
       </ul>
     </li>
@@ -131,31 +143,66 @@
   <a href="../home/index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="index.html">Stackable Operator for Apache ZooKeeper</a></li>
+    <li><a href="index.html">Stackable Agent</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/stackabletech/zookeeper-operator/edit/main/docs/modules/ROOT/pages/index.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/stackabletech/agent/edit/main/docs/modules/ROOT/pages/index.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Stackable Operator for Apache ZooKeeper</h1>
+<h1 class="page">Stackable Agent</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>This is an operator for Kubernetes that can manage <a href="https://zookeeper.apache.org/">Apache ZooKeeper</a> ensembles.</p>
+<p>The Stackable Agent is an alternative to the Kubernetes Kubelet that executes Pods not in containers but using systemd as its backend.
+It is implemented in Rust as a <a href="https://github.com/deislabs/krustlet">Krustlet</a> provider.</p>
 </div>
-<div class="admonitionblock warning">
-<table>
+<div class="paragraph">
+<p>The agent registers itself as a node with a kube-apiserver and will be considered by the Kubernetes scheduler for workloads (pods).
+To avoid <em>normal</em> Kubernetes pods being scheduled on the Stackable agent (it would not know what to do with these) the agent assigns the following taints to its <code>Node</code> object:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
 <tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-This operator does <em>not</em> work with containers/container images. It relies on the <a href="https://github.com/stackabletech/agent/">Stackable Agent</a> to run on "bare metal" via systemd.
-</td>
+<th class="tableblock halign-left valign-top">Taint</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Value</th>
 </tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">kubernetes.io/arch</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NoSchedule</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">stackable-linux</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">kubernetes.io/arch</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NoExecute</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">stackable-linux</p></td>
+</tr>
+</tbody>
 </table>
+<div class="paragraph">
+<p>These taints <em>suggest</em> to the Kubernetes scheduler that only pods with matching tolerations should be scheduled on this node.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_contributing"><a class="anchor" href="#_contributing"></a>Contributing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The agent is developed as an open source tool, and we absolutely welcome any and all contributions!
+Don&#8217;t hesitate to drop us a line at <a href="mailto:info@stackable.de">info@stackable.de</a> or reach out directly to any of our committers / contributors.</p>
+</div>
+</div>
 </div>
 </article>
   </div>

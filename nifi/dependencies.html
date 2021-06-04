@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Stackable Operator for Apache ZooKeeper :: Stackable Documentation</title>
-    <link rel="canonical" href="https://docs.stackable.tech/zookeeper/index.html">
+    <title>Dependencies :: Stackable Documentation</title>
+    <link rel="canonical" href="https://docs.stackable.tech/nifi/dependencies.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../_/css/site.css">
     <script>var uiRootPath = '../_'</script>
@@ -25,17 +25,23 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="zookeeper" data-version="master">
+<div class="nav-container" data-component="nifi" data-version="master">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="index.html">Stackable Operator for Apache ZooKeeper</a></h3>
+    <h3 class="title"><a href="index.html">Stackable Operator for Apache NiFi</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="building.html">Building the Operator</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="dependencies.html">Dependencies</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="usage.html">Usage</a>
   </li>
 </ul>
   </li>
@@ -44,7 +50,7 @@
 </div>
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
-    <span class="title">Stackable Operator for Apache ZooKeeper</span>
+    <span class="title">Stackable Operator for Apache NiFi</span>
     <span class="version">master</span>
   </div>
   <ul class="components">
@@ -80,11 +86,11 @@
         </li>
       </ul>
     </li>
-    <li class="component">
-      <a class="title" href="../nifi/index.html">Stackable Operator for Apache NiFi</a>
+    <li class="component is-current">
+      <a class="title" href="index.html">Stackable Operator for Apache NiFi</a>
       <ul class="versions">
-        <li class="version is-latest">
-          <a href="../nifi/index.html">master</a>
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
         </li>
       </ul>
     </li>
@@ -96,11 +102,11 @@
         </li>
       </ul>
     </li>
-    <li class="component is-current">
-      <a class="title" href="index.html">Stackable Operator for Apache ZooKeeper</a>
+    <li class="component">
+      <a class="title" href="../zookeeper/index.html">Stackable Operator for Apache ZooKeeper</a>
       <ul class="versions">
-        <li class="version is-current is-latest">
-          <a href="index.html">master</a>
+        <li class="version is-latest">
+          <a href="../zookeeper/index.html">master</a>
         </li>
       </ul>
     </li>
@@ -131,31 +137,57 @@
   <a href="../home/index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="index.html">Stackable Operator for Apache ZooKeeper</a></li>
+    <li><a href="index.html">Stackable Operator for Apache NiFi</a></li>
+    <li><a href="dependencies.html">Dependencies</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/stackabletech/zookeeper-operator/edit/main/docs/modules/ROOT/pages/index.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/stackabletech/nifi-operator/edit/main/docs/modules/ROOT/pages/dependencies.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Stackable Operator for Apache ZooKeeper</h1>
+<h1 class="page">Dependencies</h1>
+<div class="sect1">
+<h2 id="_stackable_agent"><a class="anchor" href="#_stackable_agent"></a>Stackable Agent</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>This is an operator for Kubernetes that can manage <a href="https://zookeeper.apache.org/">Apache ZooKeeper</a> ensembles.</p>
+<p>For now this operator works only with a special branch of the Stackable Agent: <a href="https://github.com/stackabletech/agent/tree/volume_mount_package_root_hack_for_nifi">volume_mount_package_root_hack_for_nifi</a></p>
 </div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-This operator does <em>not</em> work with containers/container images. It relies on the <a href="https://github.com/stackabletech/agent/">Stackable Agent</a> to run on "bare metal" via systemd.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>In contrast to the other Stackable operators, the config properties overwrite the property files (bootstrap.conf, nifi.properties&#8230;&#8203;) in the deployed Apache NiFi package structure. There is no extra config directory.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_zookeeper"><a class="anchor" href="#_zookeeper"></a>ZooKeeper</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The state provider is ZooKeeper.
+Which means a reference to an existing ZooKeeper ensemble must be provided</p>
+</div>
+<div class="paragraph">
+<p>Tested with version:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>3.5.8</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Not working with version:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>3.4.14</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </article>
   </div>

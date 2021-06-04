@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Configuration :: Stackable Documentation</title>
+    <link rel="canonical" href="https://docs.stackable.tech/agent/configuration.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../_/css/site.css">
+    <script>var uiRootPath = '../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://docs.stackable.tech">Stackable Documentation</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="agent" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Stackable Agent</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Installation</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="installation/building.html">Building from source</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="installation/binaries.html">Binaries &amp; Packages</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="configuration.html">Configuration</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Stackable Agent</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="index.html">Stackable Agent</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../home/index.html">Stackable Documentation</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../home/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../hdfs/index.html">Stackable Operator for Apache Hadoop HDFS</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../hdfs/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../kafka/index.html">Stackable Operator for Apache Kafka</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../kafka/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../nifi/index.html">Stackable Operator for Apache NiFi</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../nifi/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../spark/index.html">Stackable Operator for Apache Spark</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../spark/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../zookeeper/index.html">Stackable Operator for Apache ZooKeeper</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../zookeeper/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../opa/index.html">Stackable Operator for OpenPolicyAgent</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../opa/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../regorule/index.html">Stackable Operator for OpenPolicyAgent Rego rules</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../regorule/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../home/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Stackable Agent</a></li>
+    <li><a href="configuration.html">Configuration</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/stackabletech/agent/edit/main/docs/modules/ROOT/pages/configuration.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Configuration</h1>
+<div class="sect1">
+<h2 id="_command_line_parameters"><a class="anchor" href="#_command_line_parameters"></a>Command Line Parameters</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The agent accepts the following command line parameters:</p>
+</div>
+<div class="sect2">
+<h3 id="_no_config"><a class="anchor" href="#_no_config"></a>no-config</h3>
+<div class="paragraph">
+<p><strong>Default value</strong>: <code>No default value</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Required</strong>: false</p>
+</div>
+<div class="paragraph">
+<p><strong>Multiple values:</strong> false</p>
+</div>
+<div class="paragraph">
+<p>If this option is specified, any file referenced in AGENT_CONF environment variable will be ignored.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pod_cidr"><a class="anchor" href="#_pod_cidr"></a>pod-cidr</h3>
+<div class="paragraph">
+<p><strong>Default value</strong>: ``</p>
+</div>
+<div class="paragraph">
+<p><strong>Required</strong>: false</p>
+</div>
+<div class="paragraph">
+<p><strong>Multiple values:</strong> false</p>
+</div>
+<div class="paragraph">
+<p>This setting controls the pod address range that the agent reports to Kubernetes.
+The effect of this setting is that Kubernetes will reserve address blocks from withhin this range for every node.
+Depending on the setting for maximum pods per node, these will be larger or smaller ranges, and influence the maximum number of nodes for the cluster.</p>
+</div>
+<div class="paragraph">
+<p>The agent does not require any pod address ranges, and by default doesn&#8217;t specify anything for this setting.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+There should almost never be a reason to use this setting, this is mostly here for very special circumstances. Do not touch it unless you really know what you&#8217;re doing.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_bootstrap_file"><a class="anchor" href="#_bootstrap_file"></a>bootstrap-file</h3>
+<div class="paragraph">
+<p><strong>Default value</strong>: <code>/etc/stackable/stackable-agent/bootstrap-kubelet.conf</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Required</strong>: false</p>
+</div>
+<div class="paragraph">
+<p><strong>Multiple values:</strong> false</p>
+</div>
+<div class="paragraph">
+<p>The bootstrap file to use in case Kubernetes bootstraping is used to add the agent.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_server_bind_ip"><a class="anchor" href="#_server_bind_ip"></a>server-bind-ip</h3>
+<div class="paragraph">
+<p><strong>Default value</strong>: <code>No default value</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Required</strong>: false</p>
+</div>
+<div class="paragraph">
+<p><strong>Multiple values:</strong> false</p>
+</div>
+<div class="paragraph">
+<p>The local IP to register as the node&#8217;s ip with the apiserver. Will be automatically set to the first address of the first non-loopback interface if not specified.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_server_key_file"><a class="anchor" href="#_server_key_file"></a>server-key-file</h3>
+<div class="paragraph">
+<p><strong>Default value</strong>: <code>/etc/stackable/stackable-agent/secret/agent.key</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Required</strong>: false</p>
+</div>
+<div class="paragraph">
+<p><strong>Multiple values:</strong> false</p>
+</div>
+<div class="paragraph">
+<p>Private key file (in PKCS8 format) to use for the local webserver the Krustlet starts.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_package_directory"><a class="anchor" href="#_package_directory"></a>package-directory</h3>
+<div class="paragraph">
+<p><strong>Default value</strong>: <code>/opt/stackable/packages</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Required</strong>: false</p>
+</div>
+<div class="paragraph">
+<p><strong>Multiple values:</strong> false</p>
+</div>
+<div class="paragraph">
+<p>This directory will serve as starting point for packages that are needed by pods assigned to this node.\n Packages will be downloaded into the "_download" folder at the top level of this folder as archives and remain there for potential future use.</p>
+</div>
+<div class="paragraph">
+<p>Archives will the be extracted directly into this folder in subdirectories following the naming
+scheme of "productname-productversion".</p>
+</div>
+<div class="paragraph">
+<p>The agent will need full access to this directory and tries to create it if it does not exist.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_hostname"><a class="anchor" href="#_hostname"></a>hostname</h3>
+<div class="paragraph">
+<p><strong>Default value</strong>: <code>No default value</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Required</strong>: false</p>
+</div>
+<div class="paragraph">
+<p><strong>Multiple values:</strong> false</p>
+</div>
+<div class="paragraph">
+<p>The hostname to register the node under in Kubernetes - defaults to system hostname.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_data_directory"><a class="anchor" href="#_data_directory"></a>data-directory</h3>
+<div class="paragraph">
+<p><strong>Default value</strong>: <code>/var/lib/stackable/agent</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Required</strong>: false</p>
+</div>
+<div class="paragraph">
+<p><strong>Multiple values:</strong> false</p>
+</div>
+<div class="paragraph">
+<p>The directory where the stackable agent should keep its working data.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_server_cert_file"><a class="anchor" href="#_server_cert_file"></a>server-cert-file</h3>
+<div class="paragraph">
+<p><strong>Default value</strong>: <code>/etc/stackable/stackable-agent/secret/agent.crt</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Required</strong>: false</p>
+</div>
+<div class="paragraph">
+<p><strong>Multiple values:</strong> false</p>
+</div>
+<div class="paragraph">
+<p>The certificate file for the local webserver which the Krustlet starts.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_server_port"><a class="anchor" href="#_server_port"></a>server-port</h3>
+<div class="paragraph">
+<p><strong>Default value</strong>: <code>3000</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Required</strong>: false</p>
+</div>
+<div class="paragraph">
+<p><strong>Multiple values:</strong> false</p>
+</div>
+<div class="paragraph">
+<p>Port to listen on for callbacks.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_config_directory"><a class="anchor" href="#_config_directory"></a>config-directory</h3>
+<div class="paragraph">
+<p><strong>Default value</strong>: <code>/etc/stackable/serviceconfig</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Required</strong>: false</p>
+</div>
+<div class="paragraph">
+<p><strong>Multiple values:</strong> false</p>
+</div>
+<div class="paragraph">
+<p>This directory will serve as starting point for all log files which this service creates.</p>
+</div>
+<div class="paragraph">
+<p>Every service will get its own subdirectories created within this directory - for every service start a
+new subdirectory will be created to show a full history of configuration that was used for this service.</p>
+</div>
+<div class="paragraph">
+<p>ConfigMaps which are specified in the pod that describes this service will be created relative to these run
+directories - unless the mounts specify an absolute path, in which case it is allowed to break out of this directory.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+This allows anybody who can specify pods more or less full access to the file system on the machine running the agent!
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The agent will need full access to this directory and tries to create it if it does not exist.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_log_directory"><a class="anchor" href="#_log_directory"></a>log-directory</h3>
+<div class="paragraph">
+<p><strong>Default value</strong>: <code>/var/log/stackable/servicelogs</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Required</strong>: false</p>
+</div>
+<div class="paragraph">
+<p><strong>Multiple values:</strong> false</p>
+</div>
+<div class="paragraph">
+<p>This directory will serve as starting point for all log files which this service creates.
+Every service will get its own subdirectory created within this directory.
+Anything that is then specified in the log4j config or similar files will be resolved relatively to this directory.</p>
+</div>
+<div class="paragraph">
+<p>The agent will need full access to this directory and tries to create it if it does not exist.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_session"><a class="anchor" href="#_session"></a>session</h3>
+<div class="paragraph">
+<p><strong>Default value</strong>: <code>No default value</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Required</strong>: false</p>
+</div>
+<div class="paragraph">
+<p><strong>Multiple values:</strong> false</p>
+</div>
+<div class="paragraph">
+<p>This parameter specifies whether to use a session or the system DBus connection when talking to systemd.
+For our purposps the difference between the two can be explained as the session bus being restricted to the current user, whereas the system bus rolls out services that are available for every user.
+In reality is is a bit more involved than that, please refer to the <a href="https://dbus.freedesktop.org/doc/dbus-specification.html">official docs</a> for more information.</p>
+</div>
+<div class="paragraph">
+<p>When this flag is specified it causes symlinks for loaded services to be created in the currently active users systemd directory <code>~/.config/systemd/user</code> instead of one of the globally valid locations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>/lib/systemd/system</code></p>
+</li>
+<li>
+<p><code>/etc/systemd/system</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The default is to use the system bus, for which it is necessary that the agent either run as root or have passwordless sudo rights.</p>
+</div>
+<div class="paragraph">
+<p>Using the session bus will mainly be useful for scenarios without root access and for testing on developer machines.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tag"><a class="anchor" href="#_tag"></a>tag</h3>
+<div class="paragraph">
+<p><strong>Default value</strong>: <code>No default value</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Required</strong>: false</p>
+</div>
+<div class="paragraph">
+<p><strong>Multiple values:</strong> true</p>
+</div>
+<div class="paragraph">
+<p>A "key=value" pair that should be assigned to this agent as tag. This can be specified multiple times to assign additional tags.</p>
+</div>
+<div class="paragraph">
+<p>Tags are the main way of identifying nodes to assign services to later on.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_config_file"><a class="anchor" href="#_config_file"></a>Config File</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In addition to directly specifying them on the command line, the agent allows specifying a config file via the environment variable <code>CONFIG_FILE</code>. Values specified in the file will have to adhere to the format <code>--parameter=value</code>.</p>
+</div>
+<div class="paragraph">
+<p>This file can contain all command line parameters and will be parsed before the actual command line.
+For parameters that are present in the file and on the command line, the command line will take precedence, unless it is a parameter that can be specified multiple times, in which case parameters from both, file and commandline, will be merged.</p>
+</div>
+<div class="literalblock">
+<div class="title">Example config file</div>
+<div class="content">
+<pre>--package-directory=/opt/stackable/agent/work/packages
+--config-directory=/etc/stackable/agent
+--server-cert-file=/etc/stackable/agent/secure/cert.crt
+--server-key-file=/etc/stackable/agent/secure/key.key</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_kubernetes_config"><a class="anchor" href="#_kubernetes_config"></a>Kubernetes Config</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The agent uses the default way of looking for a kube-apiserver, so if your system is already set up to connect to Kubernetes with kubectl you should be good to go right of the bat.</p>
+</div>
+<div class="paragraph">
+<p>The default location for the Kubernetes client config is <code>~/.kube/config</code>, if you want to change this location you can override this via the <code>KUBECONFIG</code> environment variable.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>export KUBECONFIG=/etc/stackable/agent/kubeconfig</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_certificates"><a class="anchor" href="#_certificates"></a>Certificates</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The agent requires a keypair and signed certificate to start a webserver which can be used to handle callbacks.
+If these are not specified on the commandline, the agent will create a keypair, upload a certificate signing request to Kubernetes and wait for the certificate before continuing.
+These steps require a certificate manager to be set up and running in your Kubernetes cluster, which may or may not be the case.</p>
+</div>
+<div class="paragraph">
+<p>You can also manually create these files and specify them on the command line.
+The following example shows how to create these files using <a href="https://github.com/OpenVPN/easy-rsa">easy-rsa</a>, but this can be done in any number of different ways as well.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>./easyrsa init-pki
+./easyrsa build-ca
+./easyrsa gen-req krustlet1
+./easyrsa import-req pki/reqs/krustlet1.req krustlet1-req
+./easyrsa sign-req serverClient krustlet1-req
+# Convert key to pksc8 format
+openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in pki/private/krustlet1.key -out pkcs8.key</pre>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+</footer>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
