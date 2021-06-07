@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Binaries &amp; Packages :: Stackable Documentation</title>
-    <link rel="canonical" href="https://docs.stackable.tech/agent/installation/binaries.html">
+    <title>Logs :: Stackable Documentation</title>
+    <link rel="canonical" href="https://docs.stackable.tech/agent/monitoring/logs.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../_/css/site.css">
     <script>var uiRootPath = '../../_'</script>
@@ -39,10 +39,10 @@
     <span class="nav-text">Installation</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="building.html">Building from source</a>
+    <a class="nav-link" href="../installation/building.html">Building from source</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="binaries.html">Binaries &amp; Packages</a>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/binaries.html">Binaries &amp; Packages</a>
   </li>
 </ul>
   </li>
@@ -53,8 +53,8 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Monitoring</span>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../monitoring/logs.html">Logs</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="logs.html">Logs</a>
   </li>
 </ul>
   </li>
@@ -153,50 +153,67 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Stackable Agent</a></li>
-    <li>Installation</li>
-    <li><a href="binaries.html">Binaries &amp; Packages</a></li>
+    <li>Monitoring</li>
+    <li><a href="logs.html">Logs</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/stackabletech/agent/edit/main/docs/modules/ROOT/pages/installation/binaries.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/stackabletech/agent/edit/main/docs/modules/ROOT/pages/monitoring/logs.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Binaries &amp; Packages</h1>
-<div class="sect1">
-<h2 id="_download_binary"><a class="anchor" href="#_download_binary"></a>Download binary</h2>
-<div class="sectionbody">
+<h1 class="page">Logs</h1>
 <div class="paragraph">
-<p>We do not at this time provide pre-compiled binaries, as we are still in the process of setting up the build jobs to create these.
-This readme will be updated as soon as binary downloads are available!</p>
+<p>The logs of a pod can be retrieved with <code>kubectl logs</code>.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ kubectl logs apache-kafka
+[2021-06-01 13:51:03,852] INFO Registered kafka:type=kafka.Log4jController MBean (kafka.utils.Log4jControllerRegistration$)
+[2021-06-01 13:51:04,361] INFO Registered signal handlers for TERM, INT, HUP (org.apache.kafka.common.utils.LoggingSignalHandler)
+[2021-06-01 13:51:04,362] INFO starting (kafka.server.KafkaServer)</pre>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_os_packages"><a class="anchor" href="#_os_packages"></a>OS Packages</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>We provide OS packages for RHEL/CentOS 7 &amp; 8 as well as Debian 10 (buster).</p>
+<p>For this to work systemd version 232 or newer must be installed on the
+node. This is the case for Debian 10 and CentOS 8 but not for CentOS 7.
+The annotation <code>featureLogs</code> with a value of <code>true</code> or <code>false</code> is added
+to all pods to indicate the availability of the logs.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>$ kubectl describe pod apache-kafka
+…
+Annotations:  featureLogs: true
+…</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If <code>featureLogs</code> is <code>false</code> then the output of <code>kubectl logs</code> is empty.</p>
+</div>
+<div class="paragraph">
+<p>The following options are not yet supported:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>EL7: <a href="https://repo.stackable.tech/repository/rpm-release/el7/" class="bare">https://repo.stackable.tech/repository/rpm-release/el7/</a></p>
+<p><code>--limit-bytes</code></p>
 </li>
 <li>
-<p>EL8: <a href="https://repo.stackable.tech/repository/rpm-release/el8/" class="bare">https://repo.stackable.tech/repository/rpm-release/el8/</a></p>
+<p><code>-p --previous</code></p>
 </li>
 <li>
-<p>Debian 10: <a href="https://repo.stackable.tech/repository/deb-release" class="bare">https://repo.stackable.tech/repository/deb-release</a></p>
+<p><code>--since</code></p>
+</li>
+<li>
+<p><code>--since-time</code></p>
+</li>
+<li>
+<p><code>--timestamps</code></p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>Add these repositories to your OS and then install the <code>stackable-agent</code> package.</p>
-</div>
-</div>
 </div>
 </article>
   </div>
