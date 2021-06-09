@@ -1,0 +1,27 @@
+apiVersion: nifi.stackable.tech/v1
+kind: NifiCluster
+metadata:
+  name: simple-nificluster
+spec:
+  version: "1.13.2"
+  zookeeperReference:
+    name: simple
+    namespace: default
+    chroot: /nifi
+  nodes:
+    selectors:
+      default:
+        selector:
+          matchExpressions:
+            - operator: In
+              key: kubernetes.io/hostname
+              values:
+                - worker-1.stackable.demo
+                - worker-2.stackable.demo
+                - worker-3.stackable.demo
+        instances: 1
+        instancesPerNode: 1
+        config:
+          httpPort: 10000
+          nodeProtocolPort: 10443
+          nodeLoadBalancingPort: 6342
