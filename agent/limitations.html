@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Stackable Agent :: Stackable Documentation</title>
-    <link rel="canonical" href="https://docs.stackable.tech/agent/index.html">
+    <title>Limitations :: Stackable Documentation</title>
+    <link rel="canonical" href="https://docs.stackable.tech/agent/limitations.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../_/css/site.css">
     <script>var uiRootPath = '../_'</script>
@@ -49,7 +49,7 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="configuration.html">Configuration</a>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <a class="nav-link" href="limitations.html">Limitations</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -156,65 +156,27 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Stackable Agent</a></li>
+    <li><a href="limitations.html">Limitations</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/stackabletech/agent/edit/main/docs/modules/ROOT/pages/index.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/stackabletech/agent/edit/main/docs/modules/ROOT/pages/limitations.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Stackable Agent</h1>
-<div id="preamble">
-<div class="sectionbody">
+<h1 class="page">Limitations</h1>
 <div class="paragraph">
-<p>The Stackable Agent is an alternative to the Kubernetes Kubelet that executes Pods not in containers but using systemd as its backend.
-It is implemented in Rust as a <a href="https://github.com/deislabs/krustlet">Krustlet</a> provider.</p>
+<p>The Stackable Agent has limitations, some of which are documented here.</p>
 </div>
-<div class="paragraph">
-<p>The agent registers itself as a node with a kube-apiserver and will be considered by the Kubernetes scheduler for workloads (pods).
-To avoid <em>normal</em> Kubernetes pods being scheduled on the Stackable agent (it would not know what to do with these) the agent assigns the following taints to its <code>Node</code> object:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Taint</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">kubernetes.io/arch</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">NoSchedule</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">stackable-linux</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">kubernetes.io/arch</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">NoExecute</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">stackable-linux</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>These taints <em>suggest</em> to the Kubernetes scheduler that only pods with matching tolerations should be scheduled on this node.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_contributing"><a class="anchor" href="#_contributing"></a>Contributing</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The agent is developed as an open source tool, and we absolutely welcome any and all contributions!
-Don&#8217;t hesitate to drop us a line at <a href="mailto:info@stackable.de">info@stackable.de</a> or reach out directly to any of our committers / contributors.</p>
-</div>
-</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The maximum number of pods supported by the agent is currently hardcoded to 110.
+This restriction can be lifted if the need arises.</p>
+</li>
+</ul>
 </div>
 </article>
   </div>
