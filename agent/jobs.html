@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Limitations :: Stackable Documentation</title>
-    <link rel="canonical" href="https://docs.stackable.tech/agent/limitations.html">
+    <title>Jobs :: Stackable Documentation</title>
+    <link rel="canonical" href="https://docs.stackable.tech/agent/jobs.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../_/css/site.css">
     <script>var uiRootPath = '../_'</script>
@@ -49,13 +49,13 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="configuration.html">Configuration</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="limitations.html">Limitations</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="services.html">Services</a>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <a class="nav-link" href="jobs.html">Jobs</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -162,27 +162,69 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Stackable Agent</a></li>
-    <li><a href="limitations.html">Limitations</a></li>
+    <li><a href="jobs.html">Jobs</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/stackabletech/agent/edit/main/docs/modules/ROOT/pages/limitations.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/stackabletech/agent/edit/main/docs/modules/ROOT/pages/jobs.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Limitations</h1>
+<h1 class="page">Jobs</h1>
 <div class="paragraph">
-<p>The Stackable Agent has limitations, some of which are documented here.</p>
+<p>A job performs a task which terminates after some time. The
+<code>restartPolicy</code> must be explicitly set to <code>Never</code> or <code>OnFailure</code>:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>The maximum number of pods supported by the agent is currently hardcoded to 110.
-This restriction can be lifted if the need arises.</p>
-</li>
-</ul>
+<div class="literalblock">
+<div class="content">
+<pre>apiVersion: v1
+kind: Pod
+metadata:
+  name: &lt;pod-name&gt;
+spec:
+  containers:
+    - name: &lt;job-name&gt;
+      image: &lt;job-image&gt;
+      command:
+        - &lt;job-command&gt;
+  restartPolicy: Never</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the job terminated successfully then the pod phase is set to
+<code>Succeeded</code> and the exit code of the container state is <code>0</code>:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>status:
+  phase: Succeeded
+  message: Completed
+  reason: Completed
+  containerStatuses:
+    - state:
+        terminated:
+          exitCode: 0
+          message: Completed</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the job failed then the pod phase is set to <code>Failed</code> and the exit
+code of the container state is <code>1</code>:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>status:
+  phase: Failed
+  message: Error
+  reason: Error
+  containerStatuses:
+    - state:
+        terminated:
+          exitCode: 1
+          message: Error</pre>
+</div>
 </div>
 </article>
   </div>
