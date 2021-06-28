@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Use xxx as storage backend for the orchestrator :: Stackable Documentation</title>
-    <link rel="canonical" href="https://docs.stackable.tech/home/adr/deprecated/ADR006-choose_orchestrator_storage_backend.html">
+    <title>Apache Hadoop HDFS :: Stackable Documentation</title>
+    <link rel="canonical" href="https://docs.stackable.tech/home/maturity_levels/operators/apache_hadoop_hdfs.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../../_/css/site.css">
     <script>var uiRootPath = '../../../_'</script>
@@ -43,34 +43,34 @@
     <span class="nav-text">Current</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../ADR001-choose_project_language.html">Use English as Documentation Language</a>
+    <a class="nav-link" href="../../adr/ADR001-choose_project_language.html">Use English as Documentation Language</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../ADR002-choose_repository_structure.html">Use Multiple Repositories instead of one Large Repository</a>
+    <a class="nav-link" href="../../adr/ADR002-choose_repository_structure.html">Use Multiple Repositories instead of one Large Repository</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../ADR003-choose_review_mechanism.html">Use RTC as Review Mechanism for Changes</a>
+    <a class="nav-link" href="../../adr/ADR003-choose_review_mechanism.html">Use RTC as Review Mechanism for Changes</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../ADR004-choose_agent_programming_language.html">Use Rust as programming language for the agent</a>
+    <a class="nav-link" href="../../adr/ADR004-choose_agent_programming_language.html">Use Rust as programming language for the agent</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../ADR005-systemd_unit_file_location.html">Decide on handling and location of systemd unit files</a>
+    <a class="nav-link" href="../../adr/ADR005-systemd_unit_file_location.html">Decide on handling and location of systemd unit files</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../ADR007-defined_reuse_of_k8s.html">Decide if Kubernetes Components Are to be Reused for Stackable</a>
+    <a class="nav-link" href="../../adr/ADR007-defined_reuse_of_k8s.html">Decide if Kubernetes Components Are to be Reused for Stackable</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../ADR008-decide_reuse_of_operators.html">Allow Reuse of Existing Kubernetes Operators</a>
+    <a class="nav-link" href="../../adr/ADR008-decide_reuse_of_operators.html">Allow Reuse of Existing Kubernetes Operators</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../ADR009-selector_support.html">ADR009: Assigning Services to Nodes</a>
+    <a class="nav-link" href="../../adr/ADR009-selector_support.html">ADR009: Assigning Services to Nodes</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../ADR010-command_pattern.html">ADR010: Expressing one-shot commands in a Kubernetes-native way</a>
+    <a class="nav-link" href="../../adr/ADR010-command_pattern.html">ADR010: Expressing one-shot commands in a Kubernetes-native way</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../ADR011-directory_structure.html">ADR011: Directory Structure Used by Stackable Components on Managed Hosts</a>
+    <a class="nav-link" href="../../adr/ADR011-directory_structure.html">ADR011: Directory Structure Used by Stackable Components on Managed Hosts</a>
   </li>
 </ul>
   </li>
@@ -78,8 +78,8 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Deprecated</span>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="3">
-    <a class="nav-link" href="ADR006-choose_orchestrator_storage_backend.html">Use xxx as storage backend for the orchestrator</a>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../adr/deprecated/ADR006-choose_orchestrator_storage_backend.html">Use xxx as storage backend for the orchestrator</a>
   </li>
 </ul>
   </li>
@@ -88,7 +88,7 @@
     <span class="nav-text">Drafts</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../drafts/ADRx-choose_authorization_engine.html">Choose Authorization Engine</a>
+    <a class="nav-link" href="../../adr/drafts/ADRx-choose_authorization_engine.html">Choose Authorization Engine</a>
   </li>
 </ul>
   </li>
@@ -107,19 +107,19 @@
     <span class="nav-text">Components</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../maturity_levels/operators/operator_maturity_levels.html">Operator Maturity Levels</a>
+    <a class="nav-link" href="operator_maturity_levels.html">Operator Maturity Levels</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../maturity_levels/operators/apache_kafka.html">Apache Kafka</a>
+    <a class="nav-link" href="apache_kafka.html">Apache Kafka</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../maturity_levels/operators/apache_nifi.html">Apache NiFi</a>
+    <a class="nav-link" href="apache_nifi.html">Apache NiFi</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../maturity_levels/operators/apache_spark.html">Apache Spark</a>
+    <a class="nav-link" href="apache_spark.html">Apache Spark</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../maturity_levels/operators/apache_zookeeper.html">Apache ZooKeeper</a>
+    <a class="nav-link" href="apache_zookeeper.html">Apache ZooKeeper</a>
   </li>
 </ul>
   </li>
@@ -128,22 +128,22 @@
     <span class="nav-text">Platform</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../maturity_levels/platform/platform_maturity_levels.html">Platform Maturity Levels</a>
+    <a class="nav-link" href="../platform/platform_maturity_levels.html">Platform Maturity Levels</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../maturity_levels/platform/ML1.html">Maturity Level 1</a>
+    <a class="nav-link" href="../platform/ML1.html">Maturity Level 1</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../maturity_levels/platform/ML2.html">Maturity Level 2</a>
+    <a class="nav-link" href="../platform/ML2.html">Maturity Level 2</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../maturity_levels/platform/ML3.html">Maturity Level 3</a>
+    <a class="nav-link" href="../platform/ML3.html">Maturity Level 3</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../maturity_levels/platform/ML4.html">Maturity Level 4</a>
+    <a class="nav-link" href="../platform/ML4.html">Maturity Level 4</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="../../maturity_levels/platform/ML5.html">Maturity Level 5</a>
+    <a class="nav-link" href="../platform/ML5.html">Maturity Level 5</a>
   </li>
 </ul>
   </li>
@@ -244,211 +244,160 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../../index.html">Stackable Documentation</a></li>
-    <li>ADRs</li>
-    <li>Deprecated</li>
-    <li><a href="ADR006-choose_orchestrator_storage_backend.html">Use xxx as storage backend for the orchestrator</a></li>
+    <li><a href="apache_hadoop_hdfs.html">Apache Hadoop HDFS</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/stackabletech/documentation/edit/main/modules/adr/pages/deprecated/ADR006-choose_orchestrator_storage_backend.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/stackabletech/documentation/edit/main/modules/maturity_levels/pages/operators/apache_hadoop_hdfs.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Use xxx as storage backend for the orchestrator</h1>
+<h1 class="page">Apache Hadoop HDFS</h1>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_overview">Overview</a></li>
+<li><a href="#_operator_status">Operator Status</a></li>
+<li><a href="#_operator_dependencies">Operator Dependencies</a></li>
+<li><a href="#_operator_features">Operator Features</a></li>
+<li><a href="#_configuration">Configuration</a></li>
+<li><a href="#_deployment">Deployment</a></li>
+</ul>
+</div>
 <div id="preamble">
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Status: superseded by ADR7</p>
-</li>
-<li>
-<p>Deciders:</p>
-</li>
-<li>
-<p>Date:</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
-<p>Technical Story:
-== Deprecation Notice
-This ADR has been superseded by ADR7, which decided to stop development on the orchestrator for now and use the kube-apiserver instead.
-As the kube-apiserver exclusively supports etcd as backend provider there is no decision to document at this time.</p>
-</div>
-<div class="paragraph">
-<p>This ADR reflects the current state of dicussion at the time of approving ADR7 and should not be considered complete!</p>
+<p>Apache Hadoop HDFS is a distributed file system that provides high-throughput access to application data.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_context_and_problem_statement"><a class="anchor" href="#_context_and_problem_statement"></a>Context and Problem Statement</h2>
+<h2 id="_overview"><a class="anchor" href="#_overview"></a>Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The orchestrator will need some form of persistent storage backend, for which a decision on the technology to be used has to be taken.
-Our usage of this storage will most probably be extremely simple, even if a SQL database is chosen, the expectation is that it will be used fairly similar to a key value storage.</p>
+<p>This operator deploys and managed all of the HDFS roles including;</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_decision_drivers"><a class="anchor" href="#_decision_drivers"></a>Decision Drivers</h2>
-<div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>Availability of libraries for chosen programming language for the orchestrator</p>
+<p>NameNode</p>
 </li>
 <li>
-<p>How established is the backend at potential customers, will we need to deploy it?</p>
+<p>DataNode</p>
+</li>
+<li>
+<p>JournalNode</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_considered_options"><a class="anchor" href="#_considered_options"></a>Considered Options</h2>
+<h2 id="_operator_status"><a class="anchor" href="#_operator_status"></a>Operator Status</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>etcd</p>
+<p><strong>Category:</strong> Storage</p>
 </li>
 <li>
-<p>ZooKeeper</p>
+<p><strong>Maturity level:</strong> 0</p>
 </li>
 <li>
-<p>SQL Database</p>
+<p><strong>Version:</strong> 0.0</p>
+</li>
+<li>
+<p><strong>Development status:</strong> Roadmap</p>
+</li>
+<li>
+<p><strong>Stackable repo:</strong>  <a href="https://github.com/stackabletech/hdfs-operator" class="bare">https://github.com/stackabletech/hdfs-operator</a></p>
+</li>
+<li>
+<p><strong>Website:</strong> <a href="https://hadoop.apache.org/" class="bare">https://hadoop.apache.org/</a></p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_decision_outcome"><a class="anchor" href="#_decision_outcome"></a>Decision Outcome</h2>
+<h2 id="_operator_dependencies"><a class="anchor" href="#_operator_dependencies"></a>Operator Dependencies</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_positive_consequences"><a class="anchor" href="#_positive_consequences"></a>Positive Consequences</h3>
 <div class="paragraph">
-<p>*</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_negative_consequences"><a class="anchor" href="#_negative_consequences"></a>Negative Consequences</h3>
-<div class="paragraph">
-<p>*
-== Pros and Cons of the Options</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_etcd"><a class="anchor" href="#_etcd"></a>etcd</h3>
-<div class="paragraph">
-<p><a href="https://etcd.io/" class="bare">https://etcd.io/</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Good, because etcd is used by Kubernetes</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Likelyhood that it is already deployed</p>
-</li>
-<li>
-<p>Expertise with etcd by Kubernetes admins can be reused</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Good, because it offers watch functionality</p>
-</li>
-<li>
-<p>Good, because it offers consensus mechanisms</p>
-</li>
-<li>
-<p>Bad, because it has a hard size limit</p>
-</li>
-<li>
-<p>Bad, because it does not work well with large numbers of requests</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_zookeeper"><a class="anchor" href="#_zookeeper"></a>ZooKeeper</h3>
-<div class="paragraph">
-<p><a href="https://zookeeper.apache.org/" class="bare">https://zookeeper.apache.org/</a></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Good, because it is well established and unterstood</p>
-</li>
-<li>
-<p>Good, because it offers watch functionality</p>
-</li>
-<li>
-<p>Good, because it offers consensus mechanisms</p>
-</li>
-<li>
-<p>Bad, because it offers no real benefit over etcd</p>
-</li>
-<li>
-<p>Bad, because it is known to have trouble with high volume of changes</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_sql_database"><a class="anchor" href="#_sql_database"></a>SQL Database</h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Good, because expertise and processes for some form of database will be present at pretty much any customer</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Backup</p>
-</li>
-<li>
-<p>HA</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Good, because deploying in integrated test/dev environment is easy with sqlite</p>
-</li>
-<li>
-<p>Bad, because we would need to potentially support multiple database vendors</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Postgres</p>
-</li>
-<li>
-<p>MS Sql</p>
-</li>
-<li>
-<p>Oracle</p>
-</li>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
+<p>None</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_links"><a class="anchor" href="#_links"></a>Links</h2>
+<h2 id="_operator_features"><a class="anchor" href="#_operator_features"></a>Operator Features</h2>
 <div class="sectionbody">
-
+<div class="ulist">
+<ul>
+<li>
+<p>Automated deployment</p>
+</li>
+<li>
+<p>Starting and stopping services</p>
+</li>
+<li>
+<p>Wire encryption</p>
+</li>
+<li>
+<p>OPA authorisation</p>
+</li>
+<li>
+<p>Seamless upgrades</p>
+</li>
+<li>
+<p>Advanced monitoring</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration"><a class="anchor" href="#_configuration"></a>Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Lists of the configuration options</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_deployment"><a class="anchor" href="#_deployment"></a>Deployment</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>How to deploy the HDFS operator</p>
+</div>
+<div class="paragraph">
+<p><strong>List below taken from Charmhub</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Detailed documentation</p>
+</li>
+<li>
+<p>Guaranteed getting started</p>
+</li>
+<li>
+<p>Secrets management</p>
+</li>
+<li>
+<p>Implements sidecar pattern</p>
+</li>
+<li>
+<p>Seamless upgrades</p>
+</li>
+<li>
+<p>Unit testing</p>
+</li>
+<li>
+<p>High availability</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </article>

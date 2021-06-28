@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Maturity Level 3 :: Stackable Documentation</title>
+    <link rel="canonical" href="https://docs.stackable.tech/home/maturity_levels/platform/ML3.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://docs.stackable.tech">Stackable Documentation</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="home" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../../index.html">Stackable Documentation</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">ADRs</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Current</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../adr/ADR001-choose_project_language.html">Use English as Documentation Language</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../adr/ADR002-choose_repository_structure.html">Use Multiple Repositories instead of one Large Repository</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../adr/ADR003-choose_review_mechanism.html">Use RTC as Review Mechanism for Changes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../adr/ADR004-choose_agent_programming_language.html">Use Rust as programming language for the agent</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../adr/ADR005-systemd_unit_file_location.html">Decide on handling and location of systemd unit files</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../adr/ADR007-defined_reuse_of_k8s.html">Decide if Kubernetes Components Are to be Reused for Stackable</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../adr/ADR008-decide_reuse_of_operators.html">Allow Reuse of Existing Kubernetes Operators</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../adr/ADR009-selector_support.html">ADR009: Assigning Services to Nodes</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../adr/ADR010-command_pattern.html">ADR010: Expressing one-shot commands in a Kubernetes-native way</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../adr/ADR011-directory_structure.html">ADR011: Directory Structure Used by Stackable Components on Managed Hosts</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Deprecated</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../adr/deprecated/ADR006-choose_orchestrator_storage_backend.html">Use xxx as storage backend for the orchestrator</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Drafts</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../adr/drafts/ADRx-choose_authorization_engine.html">Choose Authorization Engine</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Maturity Levels</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Components</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../operators/operator_maturity_levels.html">Operator Maturity Levels</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../operators/apache_kafka.html">Apache Kafka</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../operators/apache_nifi.html">Apache NiFi</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../operators/apache_spark.html">Apache Spark</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../operators/apache_zookeeper.html">Apache ZooKeeper</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Platform</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="platform_maturity_levels.html">Platform Maturity Levels</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ML1.html">Maturity Level 1</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ML2.html">Maturity Level 2</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link" href="ML3.html">Maturity Level 3</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ML4.html">Maturity Level 4</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="ML5.html">Maturity Level 5</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Stackable Documentation</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../../agent/index.html">Stackable Agent</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../agent/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="../../index.html">Stackable Documentation</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../../index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../hdfs/index.html">Stackable Operator for Apache Hadoop HDFS</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../hdfs/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../kafka/index.html">Stackable Operator for Apache Kafka</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../kafka/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../nifi/index.html">Stackable Operator for Apache NiFi</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../nifi/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../spark/index.html">Stackable Operator for Apache Spark</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../spark/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../zookeeper/index.html">Stackable Operator for Apache ZooKeeper</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../zookeeper/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../opa/index.html">Stackable Operator for OpenPolicyAgent</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../opa/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../../regorule/index.html">Stackable Operator for OpenPolicyAgent Rego rules</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../../regorule/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">Stackable Documentation</a></li>
+    <li>Maturity Levels</li>
+    <li>Platform</li>
+    <li><a href="ML3.html">Maturity Level 3</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/stackabletech/documentation/edit/main/modules/maturity_levels/pages/platform/ML3.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Maturity Level 3</h1>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_objective">Objective</a></li>
+<li><a href="#_services">Services</a></li>
+<li><a href="#_installation_and_upgrades">Installation and Upgrades</a>
+<ul class="sectlevel2">
+<li><a href="#_automated_provisioning">Automated Provisioning</a></li>
+<li><a href="#_configuration_management">Configuration management</a></li>
+<li><a href="#_security_and_governance">Security and Governance</a></li>
+</ul>
+</li>
+<li><a href="#_use_cases">Use Cases</a>
+<ul class="sectlevel2">
+<li><a href="#_demo_applications">Demo Applications</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Status</strong>: draft</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_objective"><a class="anchor" href="#_objective"></a>Objective</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The aim for maturity level 3 is to provide a platform fit for GA release. This means having a comprehensive set of operators, a robust deployment and management framework and comprehensive product documentation. Installation at this stage will be largely automated with a comprehensive installation guide.</p>
+</div>
+<div class="paragraph">
+<p>This milestone will see the introduction and release of a functional control plane user interface for deployment and management of Stackable.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_services"><a class="anchor" href="#_services"></a>Services</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The core operators will have already been delivered and effort will instead be made into ensuring their robustness. A library of service templates will be provided to make deployment of common use cases straightforward and act as the bases for bespoke deployments.</p>
+</div>
+<div class="paragraph">
+<p>New operators added to Stackable based on priority, maturity and user feedback. Integration of these services with 3rd party partner tools and services will also be documented at this stage, allowing Stackable to integrate better with other data-centric tooling used by customers.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation_and_upgrades"><a class="anchor" href="#_installation_and_upgrades"></a>Installation and Upgrades</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Installation of Stackable itself will be mature and well automated at this stage. Stackable will also have a documented migration path away from other big data platforms, providing a roadmap for customers wishing to move to Stackable. This will suit self supporters, customer looking to unify disparate products and those wishing to migrate away from proprietary alternatives.</p>
+</div>
+<div class="paragraph">
+<p>Upgrade between major versions. Including updates to schemas and file formats where needed. Rollback based on point in time snapshot of pre-upgrade environment.</p>
+</div>
+<div class="sect2">
+<h3 id="_automated_provisioning"><a class="anchor" href="#_automated_provisioning"></a>Automated Provisioning</h3>
+<div class="paragraph">
+<p>Stackable will have greater control over the platforms it can be deployed to, with support public cloud vendors, Kubernetes, bare metal and hybrid deployments. There will be an API for publishing service templates to create a fully working cluster. Validation will be improved so that configuration errors are picked up early and fixed prior to deployment.</p>
+</div>
+<div class="paragraph">
+<p>The control plane will offer a wizard based deployment, allowing customer to choose the services they would like to deploy, where they will be deployed and highlight any missing service dependencies.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_configuration_management"><a class="anchor" href="#_configuration_management"></a>Configuration management</h3>
+<div class="paragraph">
+<p>The control plane will provide an interactive way to view and change service configuration and to push these changes out to the running services. Broad range of configuration options will be made available and documented for each service. The expertise of Stackable will allow for richer health checks/sanity checks/configuration validation.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_security_and_governance"><a class="anchor" href="#_security_and_governance"></a>Security and Governance</h3>
+<div class="paragraph">
+<p>Stackable will be able to provide guided installation of services that can be secured with the minimum of manual intervention and adherence to best practice. The most commonly available security features can be enabled when services are deployed.</p>
+</div>
+<div class="paragraph">
+<p>The control plane will evaluate and report on the security posture of deployed services and offer suggestions on how to improve security. Missing or unconfigured security features will be highlighted with a remedy offered to address the issue.</p>
+</div>
+<div class="paragraph">
+<p>Stackable will provide bulletins warning of new security issues and remediation steps including patches. These bulletins will be published on the web, delivered by email and published to a feed that can be read into the UI to provide operators with the information directly.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_use_cases"><a class="anchor" href="#_use_cases"></a>Use Cases</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_demo_applications"><a class="anchor" href="#_demo_applications"></a>Demo Applications</h3>
+<div class="paragraph">
+<p>A library of fully working demos to show off the capabilities of Stackable. These will cover a number of use cases in different verticals and act as demonstrations of Stackable capabilities.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Platform deployment demo for operators</p>
+</li>
+<li>
+<p>Demo applications and use cases</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Streaming</p>
+</li>
+<li>
+<p>Machine Learning</p>
+</li>
+<li>
+<p>Data visualisation</p>
+</li>
+<li>
+<p>Big data analysis</p>
+</li>
+<li>
+<p>Big data query</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+</footer>
+<script src="../../../_/js/site.js"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
