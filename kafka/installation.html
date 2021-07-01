@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Installation :: Stackable Documentation</title>
+    <link rel="canonical" href="https://docs.stackable.tech/kafka/installation.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../_/css/site.css">
+    <script>var uiRootPath = '../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://docs.stackable.tech">Stackable Documentation</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="kafka" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Stackable Operator for Apache Kafka</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="building.html">Building the Operator</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="dependencies.html">Dependencies</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="installation.html">Installation</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Stackable Operator for Apache Kafka</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../agent/index.html">Stackable Agent</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../agent/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../home/index.html">Stackable Documentation</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../home/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../hdfs/index.html">Stackable Operator for Apache Hadoop HDFS</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../hdfs/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="index.html">Stackable Operator for Apache Kafka</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../nifi/index.html">Stackable Operator for Apache NiFi</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../nifi/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../spark/index.html">Stackable Operator for Apache Spark</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../spark/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../zookeeper/index.html">Stackable Operator for Apache ZooKeeper</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../zookeeper/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../opa/index.html">Stackable Operator for OpenPolicyAgent</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../opa/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../regorule/index.html">Stackable Operator for OpenPolicyAgent Rego rules</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../regorule/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../home/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Stackable Operator for Apache Kafka</a></li>
+    <li><a href="installation.html">Installation</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/stackabletech/kafka-operator/edit/main/docs/modules/ROOT/pages/installation.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Installation</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are three ways to run the Kafka Operator:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Build from source. This is documented in <a href="building.html" class="page">Building the Operator</a>.</p>
+</li>
+<li>
+<p>Operating System packages (dep &amp; RPM)</p>
+</li>
+<li>
+<p>As a Docker container</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_operating_system_packages"><a class="anchor" href="#_operating_system_packages"></a>Operating System Packages</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_debian"><a class="anchor" href="#_debian"></a>Debian</h3>
+<div class="paragraph">
+<p>We do provide <code>deb</code> packages for Debian 10:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Version</th>
+<th class="tableblock halign-left valign-top">Repository</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Development</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://repo.stackable.tech/repository/deb-dev/" class="bare">https://repo.stackable.tech/repository/deb-dev/</a> buster main</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stable</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://repo.stackable.tech/repository/deb-release/" class="bare">https://repo.stackable.tech/repository/deb-release/</a> buster main</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>To add these repositories run a command like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">echo "deb https://repo.stackable.tech/repository/deb-release/ buster main" | sudo tee -a /etc/apt/sources.list.d/stackable.list</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After you added the repository run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo apt-get update
+sudo apt-get install stackable-kafka-operator</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rhelcentos"><a class="anchor" href="#_rhelcentos"></a>RHEL/CentOS</h3>
+<div class="paragraph">
+<p>We do provide <code>RPM</code> packages for RHEL 7 &amp; 8.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Version</th>
+<th class="tableblock halign-left valign-top">Repository</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Development RHEL 7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://repo.stackable.tech/repository/rpm-dev/el7" class="bare">https://repo.stackable.tech/repository/rpm-dev/el7</a></code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stable RHEL 7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://repo.stackable.tech/repository/rpm-release/el7" class="bare">https://repo.stackable.tech/repository/rpm-release/el7</a></code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Development RHEL 8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://repo.stackable.tech/repository/rpm-dev/el8" class="bare">https://repo.stackable.tech/repository/rpm-dev/el8</a></code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stable RHEL 8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://repo.stackable.tech/repository/rpm-release/el8" class="bare">https://repo.stackable.tech/repository/rpm-release/el8</a></code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Add this to <code>/etc/yum.repos.d/stackable.repo</code> and make sure to pick the corrrect repository:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code>[stackable]
+name=Stackable
+baseurl=https://repo.stackable.tech/repository/rpm-release/el8
+repo_gpgcheck=0
+enabled=1
+gpgcheck=0</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Install the Operator:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo yum install stackable-kafka-operator</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_docker"><a class="anchor" href="#_docker"></a>Docker</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This Operator is published as a Docker image:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code>docker.stackable.tech/stackable/kafka-operator</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To run it straight from Docker you can use this command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run -e KAFKA_OPERATOR_LOG=trace -e KUBECONFIG=/root/.kube/k3s.yaml --mount type=bind,source="$HOME/.kube/k3s.yaml",target="/root/.kube/k3s.yaml" -it docker.stackable.tech/stackable/kafka-operator:latest</code></pre>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+</footer>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
