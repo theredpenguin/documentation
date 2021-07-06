@@ -6,16 +6,24 @@ spec:
   rego: |
     package kafka.authz
 
-    default allow = false
+        default allow = false
 
-    allow {
-      not deny
-    }
+        allow {
+          is_cluster
+        }
 
-    deny {
-      not is_minute_even
-    }
+        allow {
+          not deny
+        }
 
-    is_minute_even {
-      floor(time.now_ns() / (1000 * 1000 * 1000 * 60)) % 2 == 0
-    }
+        deny {
+          not is_minute_even
+        }
+
+        is_minute_even {
+          floor(time.now_ns() / (1000 * 1000 * 1000 * 60)) % 2 == 0
+        }
+
+        is_cluster {
+        	input.action.operation == "CLUSTER_ACTION"
+        }
