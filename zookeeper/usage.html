@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Building the Operator :: Stackable Documentation</title>
-    <link rel="canonical" href="https://docs.stackable.tech/zookeeper/building.html">
+    <title>Usage :: Stackable Documentation</title>
+    <link rel="canonical" href="https://docs.stackable.tech/zookeeper/usage.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../_/css/site.css">
     <script>var uiRootPath = '../_'</script>
@@ -34,7 +34,7 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="building.html">Building the Operator</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -43,7 +43,7 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="configuration.html">Configuration</a>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <a class="nav-link" href="usage.html">Usage</a>
   </li>
 </ul>
@@ -141,24 +141,47 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Stackable Operator for Apache ZooKeeper</a></li>
-    <li><a href="building.html">Building the Operator</a></li>
+    <li><a href="usage.html">Usage</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/stackabletech/zookeeper-operator/edit/main/docs/modules/ROOT/pages/building.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/stackabletech/zookeeper-operator/edit/main/docs/modules/ROOT/pages/usage.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Building the Operator</h1>
+<h1 class="page">Usage</h1>
 <div class="paragraph">
-<p>This operator is written in Rust.
-It is developed against the latest stable Rust release (1.50.0-nightly at the time of writing).</p>
+<p>After installation, the CRD for this operator must be created:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>cargo build</pre>
+<pre>kubectl apply -f /etc/stackable/zookeeper-operator/crd/zookeepercluster.crd.yaml</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To create a single node Apache ZooKeeper (v3.5.8) cluster with Prometheus metrics exposed on port 9505:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>cat &lt;&lt;EOF | kubectl apply -f -
+apiVersion: zookeeper.stackable.tech/v1alpha1
+kind: ZookeeperCluster
+metadata:
+    name: simple
+spec:
+    version: 3.5.8
+    servers:
+        roleGroups:
+            default:
+                selector:
+                    matchLabels:
+                        kubernetes.io/arch: stackable-linux
+            replicas: 1
+            config:
+                metricsPort: 9505
+EOF</pre>
 </div>
 </div>
 </article>
