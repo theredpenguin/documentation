@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Configuration :: Stackable Documentation</title>
+    <link rel="canonical" href="https://docs.stackable.tech/kafka/configuration.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../_/css/site.css">
+    <script>var uiRootPath = '../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://docs.stackable.tech">Stackable Documentation</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="kafka" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Stackable Operator for Apache Kafka</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="building.html">Building the Operator</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="dependencies.html">Dependencies</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="installation.html">Installation</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="configuration.html">Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="usage.html">Usage</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Stackable Operator for Apache Kafka</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../agent/index.html">Stackable Agent</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../agent/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../home/index.html">Stackable Documentation</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../home/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../hdfs/index.html">Stackable Operator for Apache Hadoop HDFS</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../hdfs/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="index.html">Stackable Operator for Apache Kafka</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../nifi/index.html">Stackable Operator for Apache NiFi</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../nifi/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../spark/index.html">Stackable Operator for Apache Spark</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../spark/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../zookeeper/index.html">Stackable Operator for Apache ZooKeeper</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../zookeeper/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../opa/index.html">Stackable Operator for OpenPolicyAgent</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../opa/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../regorule/index.html">Stackable Operator for OpenPolicyAgent Rego rules</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../regorule/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../home/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Stackable Operator for Apache Kafka</a></li>
+    <li><a href="configuration.html">Configuration</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/stackabletech/kafka-operator/edit/main/docs/modules/ROOT/pages/configuration.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Configuration</h1>
+<div class="sect1">
+<h2 id="_command_line_parameters"><a class="anchor" href="#_command_line_parameters"></a>Command Line Parameters</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This operator accepts the following command line parameters:</p>
+</div>
+<div class="sect2">
+<h3 id="_product_config"><a class="anchor" href="#_product_config"></a>product-config</h3>
+<div class="paragraph">
+<p><strong>Default value</strong>: <code>/etc/stackable/kafka-operator/config-spec/properties.yaml</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Required</strong>: false</p>
+</div>
+<div class="paragraph">
+<p><strong>Multiple values:</strong> false</p>
+</div>
+<div class="paragraph">
+<p>This file contains property definitions for the Apache Kafka configuration.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_kubernetes_custom_resource_options"><a class="anchor" href="#_kubernetes_custom_resource_options"></a>Kubernetes custom resource options</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The cluster can be configured via a YAML file. This custom resource specifies the amount of replicas for each role group, role group or role specific configuration like port definitions etc.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>apiVersion: kafka.stackable.tech/v1alpha1
+kind: KafkaCluster
+metadata:
+  name: simple
+spec:
+  version:
+    kafka_version: 2.8.0
+  zookeeperReference:
+    namespace: default
+    name: simple
+  opa:
+    reference:
+      namespace: default
+      name: simple-opacluster
+    authorizerClassName: com.bisnode.kafka.authorization.OpaAuthorizer
+    authorizerCacheInitialCapacity: 0
+    authorizerCacheMaximumSize: 0
+    authorizerCacheExpireAfterSeconds: 0
+  brokers:
+    roleGroups:
+      default:
+        selector:
+          matchLabels:
+            kubernetes.io/arch: stackable-linux
+        replicas: 1
+        config:
+          logDirs: "/tmp/kafka-logs"
+          metricsPort: 9606</pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_structure"><a class="anchor" href="#_structure"></a>Structure</h3>
+<div class="paragraph">
+<p>There are three levels of configuration:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Common shared options</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contains configuration that is shared within the whole cluster ensemble. E.g., version, image, encryption or logging.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Role options</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This configuration is shared for all roles of a certain type (in this operator, only the Broker role).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RoleGroup options</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Options provided in the role group apply to each created "pod".</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_common_shared_options"><a class="anchor" href="#_common_shared_options"></a>Common shared options</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Related Kafka properties</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">version</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Kafka version used in the format: x.y.z</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">zookeeperReference</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">struct</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A reference to a ZooKeeper cluster (namespace, name, chroot)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">opa</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">struct</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An OPA configuration for Kafka, consisting of an OPA reference (namespace, name) and some authorizer properties</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_role_rolegroup_options"><a class="anchor" href="#_role_rolegroup_options"></a>Role &amp; RoleGroup options</h3>
+<div class="paragraph">
+<p>We pool Role and RoleGroup options, since they are the same for Role and RoleGroup.</p>
+</div>
+<div class="sect3">
+<h4 id="_server"><a class="anchor" href="#_server"></a>Server</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Related Kafka properties</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Location</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">metricsPort</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The port where Kafka metrics are exposed as a Prometheus endpoint.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JMX Exporter / CLI</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">logDirs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A comma separated list of directories under which to store log files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">log.Dirs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">server.properties</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+</footer>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
