@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Usage :: Stackable Documentation</title>
-    <link rel="canonical" href="https://docs.stackable.tech/opa/usage.html">
+    <title>Configuration :: Stackable Documentation</title>
+    <link rel="canonical" href="https://docs.stackable.tech/opa/configuration.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../_/css/site.css">
     <script>var uiRootPath = '../_'</script>
@@ -40,10 +40,10 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="installation.html">Installation</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="usage.html">Usage</a>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <a class="nav-link" href="configuration.html">Configuration</a>
   </li>
 </ul>
@@ -141,48 +141,38 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Stackable Operator for OpenPolicyAgent</a></li>
-    <li><a href="usage.html">Usage</a></li>
+    <li><a href="configuration.html">Configuration</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/stackabletech/opa-operator/edit/main/docs/modules/ROOT/pages/usage.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/stackabletech/opa-operator/edit/main/docs/modules/ROOT/pages/configuration.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Usage</h1>
+<h1 class="page">Configuration</h1>
+<div class="sect1">
+<h2 id="_command_line_parameters"><a class="anchor" href="#_command_line_parameters"></a>Command Line Parameters</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>After installation, the CRD for this operator must be created:</p>
+<p>This operator accepts the following command line parameters:</p>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>kubectl apply -f /etc/stackable/opa-operator/crd/opa.crd.yaml</pre>
-</div>
+<div class="sect2">
+<h3 id="_product_config"><a class="anchor" href="#_product_config"></a>product-config</h3>
+<div class="paragraph">
+<p><strong>Default value</strong>: <code>/etc/stackable/opa-operator/config-spec/properties.yaml</code></p>
 </div>
 <div class="paragraph">
-<p>To create a single node OPA (v0.27.1) cluster with Prometheus metrics exposed on port 8181:</p>
+<p><strong>Required</strong>: false</p>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>cat &lt;&lt;EOF | kubectl apply -f -
-apiVersion: authz.stackable.tech/v1alpha1
-kind: OpenPolicyAgent
-metadata:
-  name: simple
-spec:
-  version: "0.27.1"
-  servers:
-    roleGroups:
-      default:
-        selector:
-          matchLabels:
-            kubernetes.io/arch: stackable-linux
-        replicas: 1
-        config:
-          port: 8181
-          repoRuleReference: "http://mdesktop:3030/opa/v1"
-EOF</pre>
+<div class="paragraph">
+<p><strong>Multiple values:</strong> false</p>
+</div>
+<div class="paragraph">
+<p>This file contains property definitions for the Open Policy Agent configuration.</p>
+</div>
+</div>
 </div>
 </div>
 </article>
