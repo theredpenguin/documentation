@@ -153,42 +153,55 @@
 <div class="sectionbody">
 <div class="paragraph">
 <p>The cluster can be configured via a YAML file.
-Each node type (Master, Worker, History Server) can have multiple instances within multiple selectors.
-Multiple instances in the same selector can lead to port duplicates which results in the affected node
-to increase the port one by one. Keep that in mind when e.g. running multiple masters without specified ports
-on the same node.</p>
+Each role (Master, Worker, History-Server) can have multiple instances within multiple role groups.
+Multiple instances in the same selector may lead to port duplicates which results in the affected node
+to increase the port one by one (if max_port_retries is not set to 0). Keep that in mind when, for example running multiple masters without specified ports on the same node.</p>
 </div>
 <div class="literalblock">
 <div class="content">
 <pre>apiVersion: spark.stackable.tech/v1
 kind: SparkCluster
 metadata:
-name: spark-cluster
-  spec:
-    master:
-      selectors:
-        - nodeName: "some_master_node"
-          instances: 1
-    worker:
-      selectors:
-        - nodeName: "some_worker_node"
-          instances: 1
-          cores: 2
-          memory: "2g"
-    historyServer:
-      selectors:
-        - nodeName: "some_history_server_node"
-          instances: 1
+  name: simple
+spec:
   version: "3.0.1"
-  secret: "my_secret"
-  logDir: "/tmp/spark-events"</pre>
+  masters:
+    roleGroups:
+      default:
+        selector:
+          matchLabels:
+            kubernetes.io/arch: stackable-linux
+        replicas: 1
+        config:
+          masterPort: 7078
+          masterWebUiPort: 8081
+  workers:
+    roleGroups:
+      1core1g:
+        selector:
+          matchLabels:
+            kubernetes.io/arch: stackable-linux
+        replicas: 2
+        config:
+          cores: 1
+          memory: "1g"
+          workerPort: 3031
+          workerWebUiPort: 8083
+  historyServers:
+    roleGroups:
+      default:
+        selector:
+          matchLabels:
+            kubernetes.io/arch: stackable-linux
+        replicas: 1
+        config:
+          historyWebUiPort: 18081</pre>
 </div>
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_structure"><a class="anchor" href="#_structure"></a>Structure</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_structure"><a class="anchor" href="#_structure"></a>Structure</h3>
 <div class="paragraph">
 <p>There are three levels of configuration:</p>
 </div>
@@ -199,24 +212,22 @@ name: spark-cluster
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Common shared options</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Contains configuration that is shared within the whole cluster. E.g. the spark image, secrets, encryption or logging options.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Common properties</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contains configuration that is shared within the whole cluster. For example the spark version, secrets, encryption or logging options.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Node type options</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Role properties</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">This configuration is shared for all nodes of a certain type (Master, Worker, History-Server)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Selector specific options</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Options provided in the selector are limited to one specific node of a node type (Master, Worker, History-Server) and apply to one physical machine.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Role Group properties</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Options provided in the role group are limited to one specific role and role group.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_common_shared_options"><a class="anchor" href="#_common_shared_options"></a>Common shared options</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_common_properties"><a class="anchor" href="#_common_properties"></a>Common properties</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -258,20 +269,16 @@ name: spark-cluster
 </tbody>
 </table>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_node_type_options"><a class="anchor" href="#_node_type_options"></a>Node type options</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_role_properties"><a class="anchor" href="#_role_properties"></a>Role properties</h3>
 <div class="paragraph">
 <p>T.b.d.</p>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_selector_specific_options"><a class="anchor" href="#_selector_specific_options"></a>Selector specific options</h2>
-<div class="sectionbody">
 <div class="sect2">
-<h3 id="_master"><a class="anchor" href="#_master"></a>Master</h3>
+<h3 id="_role_group_properties"><a class="anchor" href="#_role_group_properties"></a>Role Group properties</h3>
+<div class="sect3">
+<h4 id="_master"><a class="anchor" href="#_master"></a>Master</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -301,8 +308,8 @@ name: spark-cluster
 </tbody>
 </table>
 </div>
-<div class="sect2">
-<h3 id="_worker"><a class="anchor" href="#_worker"></a>Worker</h3>
+<div class="sect3">
+<h4 id="_worker"><a class="anchor" href="#_worker"></a>Worker</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -344,8 +351,8 @@ name: spark-cluster
 </tbody>
 </table>
 </div>
-<div class="sect2">
-<h3 id="_history_server"><a class="anchor" href="#_history_server"></a>History Server</h3>
+<div class="sect3">
+<h4 id="_history_server"><a class="anchor" href="#_history_server"></a>History Server</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -363,7 +370,7 @@ name: spark-cluster
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">storePath</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A local directory where to cache application history data. If set, the history server will store application data on disk instead of keeping it in memory. The data written to disk will be re-used in the event of a history server restart.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A local directory where to cache application data. If set, the history server will store application data on disk instead of keeping it in memory. The data written to disk will be re-used in the event of a history server restart.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">spark.history.store.path</p></td>
 </tr>
 <tr>
@@ -374,7 +381,6 @@ name: spark-cluster
 </tr>
 </tbody>
 </table>
-</div>
 </div>
 </div>
 </article>
