@@ -40,6 +40,9 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="installation.html">Installation</a>
   </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="configuration.html">Configuration</a>
+  </li>
   <li class="nav-item is-current-page" data-depth="1">
     <a class="nav-link" href="usage.html">Usage</a>
   </li>
@@ -67,14 +70,6 @@
       <ul class="versions">
         <li class="version is-latest">
           <a href="../home/index.html">master</a>
-        </li>
-      </ul>
-    </li>
-    <li class="component">
-      <a class="title" href="../hdfs/index.html">Stackable Operator for Apache Hadoop HDFS</a>
-      <ul class="versions">
-        <li class="version is-latest">
-          <a href="../hdfs/index.html">master</a>
         </li>
       </ul>
     </li>
@@ -107,6 +102,14 @@
       <ul class="versions">
         <li class="version is-latest">
           <a href="../zookeeper/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../monitoring/index.html">Stackable Operator for Monitoring and Metrics</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../monitoring/index.html">master</a>
         </li>
       </ul>
     </li>
@@ -152,19 +155,33 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>The cluster can be configured via a YAML file.
-Each role (Master, Worker, History-Server) can have multiple instances within multiple role groups.
-Multiple instances in the same selector may lead to port duplicates which results in the affected node
-to increase the port one by one (if max_port_retries is not set to 0). Keep that in mind when, for example running multiple masters without specified ports on the same node.</p>
+<p>After installation, the CRD for this operator must be created:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>apiVersion: spark.stackable.tech/v1
+<pre>kubectl apply -f /etc/stackable/spark-operator/crd/sparkcluster.crd.yaml</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The example below creates an Apache Spark 3.0.1 cluster with one master (because of <code>replicas: 1</code>), one history server and as many workers as nodes available.
+Multiple instances in the same selector may lead to port duplicates which results in the affected node
+to increase the port one by one (if max_port_retries is not set to 0). Keep that in mind when, for example running multiple masters without specified ports on the same node.</p>
+</div>
+<div class="paragraph">
+<p>Because of <code>enableMonitoring: true</code>, all pods will be annotated for metric scraping. Metrics are retrieved from Spark&#8217;s built in Prometheus Servlet. Only cluster-wide metrics are scraped currently (no application metrics).</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>cat &lt;&lt;EOF | kubectl apply -f -
+apiVersion: spark.stackable.tech/v1alpha1
 kind: SparkCluster
 metadata:
   name: simple
 spec:
   version: "3.0.1"
+  config:
+    logDir: "file:///tmp"
+    enableMonitoring: true
   masters:
     roleGroups:
       default:
@@ -177,14 +194,13 @@ spec:
           masterWebUiPort: 8081
   workers:
     roleGroups:
-      1core1g:
+      2core2g:
         selector:
           matchLabels:
             kubernetes.io/arch: stackable-linux
-        replicas: 2
         config:
-          cores: 1
-          memory: "1g"
+          cores: 2
+          memory: "2g"
           workerPort: 3031
           workerWebUiPort: 8083
   historyServers:
@@ -195,7 +211,8 @@ spec:
             kubernetes.io/arch: stackable-linux
         replicas: 1
         config:
-          historyWebUiPort: 18081</pre>
+          historyWebUiPort: 18081
+EOF</pre>
 </div>
 </div>
 </div>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Installation :: Stackable Documentation</title>
-    <link rel="canonical" href="https://docs.stackable.tech/regorule/installation.html">
+    <link rel="canonical" href="https://docs.stackable.tech/monitoring/installation.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../_/css/site.css">
     <script>var uiRootPath = '../_'</script>
@@ -25,12 +25,12 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="regorule" data-version="master">
+<div class="nav-container" data-component="monitoring" data-version="master">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="index.html">Stackable Operator for OpenPolicyAgent Rego rules</a></h3>
+    <h3 class="title"><a href="index.html">Stackable Operator for Monitoring and Metrics</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
@@ -39,6 +39,9 @@
   </li>
   <li class="nav-item is-current-page" data-depth="1">
     <a class="nav-link" href="installation.html">Installation</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="configuration.html">Configuration</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="usage.html">Usage</a>
@@ -50,7 +53,7 @@
 </div>
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
-    <span class="title">Stackable Operator for OpenPolicyAgent Rego rules</span>
+    <span class="title">Stackable Operator for Monitoring and Metrics</span>
     <span class="version">master</span>
   </div>
   <ul class="components">
@@ -102,11 +105,11 @@
         </li>
       </ul>
     </li>
-    <li class="component">
-      <a class="title" href="../monitoring/index.html">Stackable Operator for Monitoring and Metrics</a>
+    <li class="component is-current">
+      <a class="title" href="index.html">Stackable Operator for Monitoring and Metrics</a>
       <ul class="versions">
-        <li class="version is-latest">
-          <a href="../monitoring/index.html">master</a>
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
         </li>
       </ul>
     </li>
@@ -118,11 +121,11 @@
         </li>
       </ul>
     </li>
-    <li class="component is-current">
-      <a class="title" href="index.html">Stackable Operator for OpenPolicyAgent Rego rules</a>
+    <li class="component">
+      <a class="title" href="../regorule/index.html">Stackable Operator for OpenPolicyAgent Rego rules</a>
       <ul class="versions">
-        <li class="version is-current is-latest">
-          <a href="index.html">master</a>
+        <li class="version is-latest">
+          <a href="../regorule/index.html">master</a>
         </li>
       </ul>
     </li>
@@ -137,11 +140,11 @@
   <a href="../home/index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="index.html">Stackable Operator for OpenPolicyAgent Rego rules</a></li>
+    <li><a href="index.html">Stackable Operator for Monitoring and Metrics</a></li>
     <li><a href="installation.html">Installation</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/stackabletech/regorule-operator/edit/main/docs/modules/ROOT/pages/installation.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/stackabletech/monitoring-operator/edit/main/docs/modules/ROOT/pages/installation.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
@@ -152,7 +155,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>There are three ways to run the Regorule Operator:</p>
+<p>There are three ways to run the Monitoring Operator:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -213,7 +216,7 @@
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo apt-get update
-sudo apt-get install stackable-regorule-operator</code></pre>
+sudo apt-get install stackable-monitoring-operator</code></pre>
 </div>
 </div>
 </div>
@@ -270,7 +273,7 @@ gpgcheck=0</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo yum install stackable-regorule-operator</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo yum install stackable-monitoring-operator</code></pre>
 </div>
 </div>
 </div>
@@ -284,7 +287,7 @@ gpgcheck=0</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code>docker.stackable.tech/stackable/regorule-operator</code></pre>
+<pre class="highlightjs highlight"><code>docker.stackable.tech/stackable/monitoring-operator</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -292,7 +295,7 @@ gpgcheck=0</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run -e REGORULE_OPERATOR_LOG=trace -e KUBECONFIG=/root/.kube/k3s.yaml --mount type=bind,source="$HOME/.kube/k3s.yaml",target="/root/.kube/k3s.yaml" -it docker.stackable.tech/stackable/regorule-operator:latest</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run -e MONITORING_OPERATOR_LOG=trace -e KUBECONFIG=/root/.kube/k3s.yaml --mount type=bind,source="$HOME/.kube/k3s.yaml",target="/root/.kube/k3s.yaml" -it docker.stackable.tech/stackable/monitoring-operator:latest</code></pre>
 </div>
 </div>
 </div>

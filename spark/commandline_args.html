@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Building the Operator :: Stackable Documentation</title>
-    <link rel="canonical" href="https://docs.stackable.tech/hdfs/building.html">
+    <title>Untitled :: Stackable Documentation</title>
+    <link rel="canonical" href="https://docs.stackable.tech/spark/commandline_args.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../_/css/site.css">
     <script>var uiRootPath = '../_'</script>
@@ -25,17 +25,26 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="hdfs" data-version="master">
+<div class="nav-container" data-component="spark" data-version="master">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="index.html">Stackable Operator for Apache Hadoop HDFS</a></h3>
+    <h3 class="title"><a href="index.html">Stackable Operator for Apache Spark</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="building.html">Building the Operator</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="installation.html">Installation</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="configuration.html">Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="usage.html">Usage</a>
   </li>
 </ul>
   </li>
@@ -44,7 +53,7 @@
 </div>
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
-    <span class="title">Stackable Operator for Apache Hadoop HDFS</span>
+    <span class="title">Stackable Operator for Apache Spark</span>
     <span class="version">master</span>
   </div>
   <ul class="components">
@@ -64,14 +73,6 @@
         </li>
       </ul>
     </li>
-    <li class="component is-current">
-      <a class="title" href="index.html">Stackable Operator for Apache Hadoop HDFS</a>
-      <ul class="versions">
-        <li class="version is-current is-latest">
-          <a href="index.html">master</a>
-        </li>
-      </ul>
-    </li>
     <li class="component">
       <a class="title" href="../kafka/index.html">Stackable Operator for Apache Kafka</a>
       <ul class="versions">
@@ -88,11 +89,11 @@
         </li>
       </ul>
     </li>
-    <li class="component">
-      <a class="title" href="../spark/index.html">Stackable Operator for Apache Spark</a>
+    <li class="component is-current">
+      <a class="title" href="index.html">Stackable Operator for Apache Spark</a>
       <ul class="versions">
-        <li class="version is-latest">
-          <a href="../spark/index.html">master</a>
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
         </li>
       </ul>
     </li>
@@ -101,6 +102,14 @@
       <ul class="versions">
         <li class="version is-latest">
           <a href="../zookeeper/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../monitoring/index.html">Stackable Operator for Monitoring and Metrics</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../monitoring/index.html">master</a>
         </li>
       </ul>
     </li>
@@ -130,28 +139,27 @@
 <button class="nav-toggle"></button>
   <a href="../home/index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
-  <ul>
-    <li><a href="index.html">Stackable Operator for Apache Hadoop HDFS</a></li>
-    <li><a href="building.html">Building the Operator</a></li>
-  </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/stackabletech/hdfs-operator/edit/main/docs/modules/ROOT/pages/building.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/stackabletech/spark-operator/edit/main/docs/modules/ROOT/pages/commandline_args.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Building the Operator</h1>
+<div class="sect2">
+<h3 id="_product_config"><a class="anchor" href="#_product_config"></a>product-config</h3>
 <div class="paragraph">
-<p>This operator is written in Rust.</p>
+<p><strong>Default value</strong>: <code>/etc/stackable/spark-operator/config-spec/properties.yaml</code></p>
 </div>
 <div class="paragraph">
-<p>It is developed against the latest stable Rust release, and we currently don&#8217;t support any older versions.</p>
+<p><strong>Required</strong>: false</p>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>cargo build</pre>
+<div class="paragraph">
+<p><strong>Multiple values:</strong> false</p>
+</div>
+<div class="paragraph">
+<p>This file contains property definitions for the Apache Spark configuration.</p>
 </div>
 </div>
 </article>

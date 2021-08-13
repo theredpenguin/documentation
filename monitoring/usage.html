@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Usage :: Stackable Documentation</title>
+    <link rel="canonical" href="https://docs.stackable.tech/monitoring/usage.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../_/css/site.css">
+    <script>var uiRootPath = '../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://docs.stackable.tech">Stackable Documentation</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="monitoring" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Stackable Operator for Monitoring and Metrics</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="building.html">Building the Operator</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="installation.html">Installation</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="configuration.html">Configuration</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="usage.html">Usage</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Stackable Operator for Monitoring and Metrics</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../agent/index.html">Stackable Agent</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../agent/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../home/index.html">Stackable Documentation</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../home/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../kafka/index.html">Stackable Operator for Apache Kafka</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../kafka/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../nifi/index.html">Stackable Operator for Apache NiFi</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../nifi/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../spark/index.html">Stackable Operator for Apache Spark</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../spark/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../zookeeper/index.html">Stackable Operator for Apache ZooKeeper</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../zookeeper/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="index.html">Stackable Operator for Monitoring and Metrics</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../opa/index.html">Stackable Operator for OpenPolicyAgent</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../opa/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../regorule/index.html">Stackable Operator for OpenPolicyAgent Rego rules</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../regorule/index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../home/index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Stackable Operator for Monitoring and Metrics</a></li>
+    <li><a href="usage.html">Usage</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/stackabletech/monitoring-operator/edit/main/docs/modules/ROOT/pages/usage.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Usage</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>After installation, the CRD for this operator must be created:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>kubectl apply -f /etc/stackable/monitoring-operator/crd/deploy/monitoringcluster.crd.yaml</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following example creates a complete monitoring cluster with three roles: <code>podAggregator</code>, <code>nodeExporter</code> and <code>federation</code>.</p>
+</div>
+<div class="paragraph">
+<p>The role <code>nodeExporter</code> is used to configure the Prometheus Node Exporter on every node in the K8S cluster.. Metrics are exposed on port <code>10102</code> and the <code>cliArgs</code> are passed on to the <code>node-exporter</code> executable as command line arguments. The <code>node-exporter</code> collects hardware metrics from the host and exposes them for scraping on the <code>metricsPort</code>. This role is designed to be used in non containerized environments.</p>
+</div>
+<div class="paragraph">
+<p>The <code>podAggregator</code> role used to scrape the <code>nodeExporter</code> running on <code>localhost</code> and all local (to the machine) K8S pods marked with the label <code>monitoring.stackable.tech/should_be_scraped</code>. Properties defined in the <code>podAggregator.roleGroups.default.config</code> section are applied to Prometheus configuration file
+and the <code>cliArgs</code> are appended to the command line arguments.</p>
+</div>
+<div class="paragraph">
+<p>Both the <code>nodeExporter</code> role and the <code>podAggregator</code> role are expected to be deployed once on every node in the K8S cluster. They are similar to K8S <code>DaemonSets</code>.The <code>federation</code> role is different. It&#8217;s purpose is to provide unified overview over all metrics collected from the products deployed in the K8S cluster. For this reason, it is configured with a <code>replicas</code> property of one. It is possible to have <code>federation</code> roles with more then one replicas but user should be aware that each additional replica induces a collection overhead on the `podAggregator`s that might be significant. Users are expected to manage their metrics over this single role.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>cat &lt;&lt;EOF | kubectl apply -f -
+apiVersion: monitoring.stackable.tech/v1alpha1
+kind: MonitoringCluster
+metadata:
+  name: simple
+spec:
+  version: 2.28.1
+  podAggregator:
+    roleGroups:
+      default:
+        selector:
+          matchLabels:
+            kubernetes.io/arch: stackable-linux
+        config:
+          webUiPort: 9090
+          scrapeInterval: 15s
+          scrapeTimeout: 5s
+          evaluationInterval: 10s
+          scheme: http
+          cliArgs:
+            - "--storage.tsdb.path={{configroot}}/aggregator_data/"
+            - "--storage.tsdb.retention.time=7d"
+  nodeExporter:
+    roleGroups:
+      default:
+        selector:
+          matchLabels:
+            kubernetes.io/arch: stackable-linux
+        config:
+          metricsPort: 10102
+          cliArgs:
+            - "--no-collector.wifi"
+            - "--no-collector.hwmon"
+            - "--collector.filesystem.ignored-mount-points=^/(dev|proc|sys|var/lib/docker/.+|var/lib/kubelet/pods/.+)($|/)"
+            - "--collector.netclass.ignored-devices=^(veth.*|[a-f0-9]{15})$"
+            - "--collector.netdev.device-exclude=^(veth.*|[a-f0-9]{15})$"
+  federation:
+    roleGroups:
+      default:
+        selector:
+          matchLabels:
+            kubernetes.io/arch: stackable-linux
+        replicas: 1
+        config:
+          webUiPort: 9404
+          scrapeInterval: 15s
+          scrapeTimeout: 5s
+          evaluationInterval: 10s
+          scheme: http
+          cliArgs:
+            - "--storage.tsdb.path={{configroot}}/federation_data/"
+            - "--storage.tsdb.retention.time=30d"</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_structure"><a class="anchor" href="#_structure"></a>Structure</h3>
+<div class="paragraph">
+<p>There are three levels of configuration:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Common shared options</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contains configuration that is shared within the whole cluster ensemble. E.g. version, image, encryption or logging.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Role options</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">This configuration is shared for all roles of a certain type (in this operator, only the Server role).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RoleGroup options</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Options provided in the role group apply to each created "pod".</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_common_shared_options"><a class="anchor" href="#_common_shared_options"></a>Common shared options</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Related Prometheus/Victoria properties</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">version</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Monitoring version used in the format: x.y.z</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_role_rolegroup_options"><a class="anchor" href="#_role_rolegroup_options"></a>Role &amp; RoleGroup options</h3>
+<div class="paragraph">
+<p>We summarize Role and RoleGroup options. They are the same options for Role and RoleGroup.</p>
+</div>
+<div class="sect3">
+<h4 id="_podaggregator"><a class="anchor" href="#_podaggregator"></a>PodAggregator</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Related Prometheus/Victoria properties</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Location</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">webUiPort</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Start the Prometheus / Victoria UI on a different port (default 9090).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">--web.listen-address</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cli</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">scrapeInterval</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How frequently to scrape targets from this job (10s, 1h30m). Must be higher than the scrapeTimeout.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">scrape_interval</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">prometheus.yaml</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">scrapeTimeout</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How long until a scrape request times out. (10s, 1h30m). Must be lower than the scrapeInterval.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">scrape_timeout</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">prometheus.yaml</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">evaluationInterval</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How frequently to evaluate rules. (10s, 1h30m).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">evaluation_interval</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">prometheus.yaml</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">schema</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Configures the protocol scheme used for requests.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">schema</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">prometheus.yaml</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_nodeexporter"><a class="anchor" href="#_nodeexporter"></a>NodeExporter</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Related Prometheus/Victoria properties</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Location</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">metricsPort</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Start the Prometheus Node Exporter on a different port (default 9100).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">--web.listen-address</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cli</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">nodeExporterArgs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Array[string]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Configuration parameters on what and how to scrape node metrics.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cli</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_federation"><a class="anchor" href="#_federation"></a>Federation</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Related Prometheus/Victoria properties</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Location</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">webUiPort</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Start the Prometheus / Victoria UI on a different port (default 9090).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">--web.listen-address</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cli</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">scrapeInterval</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How frequently to scrape targets from this job (10s, 1h30m). Must be higher than the scrapeTimeout.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">scrape_interval</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">prometheus.yaml</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">scrapeTimeout</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How long until a scrape request times out. (10s, 1h30m). Must be lower than the scrapeInterval.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">scrape_timeout</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">prometheus.yaml</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">evaluationInterval</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">How frequently to evaluate rules. (10s, 1h30m).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">evaluation_interval</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">prometheus.yaml</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">schema</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Configures the protocol scheme used for requests.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">schema</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">prometheus.yaml</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+</footer>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

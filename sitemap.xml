@@ -4,13 +4,13 @@
 <loc>https://docs.stackable.tech/sitemap-agent.xml</loc>
 </sitemap>
 <sitemap>
-<loc>https://docs.stackable.tech/sitemap-hdfs.xml</loc>
-</sitemap>
-<sitemap>
 <loc>https://docs.stackable.tech/sitemap-home.xml</loc>
 </sitemap>
 <sitemap>
 <loc>https://docs.stackable.tech/sitemap-kafka.xml</loc>
+</sitemap>
+<sitemap>
+<loc>https://docs.stackable.tech/sitemap-monitoring.xml</loc>
 </sitemap>
 <sitemap>
 <loc>https://docs.stackable.tech/sitemap-nifi.xml</loc>
