@@ -157,7 +157,7 @@
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>kubectl apply -f /etc/stackable/opa-operator/crd/opa.crd.yaml</pre>
+<pre>kubectl apply -f /etc/stackable/opa-operator/crd/openpolicyagent.crd.yaml</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -166,7 +166,7 @@
 <div class="literalblock">
 <div class="content">
 <pre>cat &lt;&lt;EOF | kubectl apply -f -
-apiVersion: authz.stackable.tech/v1alpha1
+apiVersion: opa.stackable.tech/v1alpha1
 kind: OpenPolicyAgent
 metadata:
   name: simple
