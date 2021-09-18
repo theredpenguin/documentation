@@ -173,6 +173,8 @@
 </aside>
 <article class="doc">
 <h1 class="page">Limitations</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
 <p>The Stackable Agent has limitations, some of which are documented here.</p>
 </div>
@@ -185,7 +187,79 @@
 <p>The maximum number of pods supported by the agent is currently hardcoded to 110.
 This restriction can be lifted if the need arises.</p>
 </li>
+<li>
+<p>SSL certificate is not automatically renewed due to upstream bug <a href="https://github.com/krustlet/krustlet/issues/553" class="bare">https://github.com/krustlet/krustlet/issues/553</a> (manual activity required described below)</p>
+</li>
 </ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ssl_certificate_renewal"><a class="anchor" href="#_ssl_certificate_renewal"></a>SSL certificate renewal</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The agent SSL certificate expiry date can be observed via:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">openssl x509 -enddate -noout -in /etc/stackable/stackable-agent/secret/agent.crt</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>See upstream documentation about the certificate system at <a href="https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/" class="bare">https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/</a>, and the following steps.</p>
+</div>
+<div class="paragraph">
+<p>To generate a new certificate, first delete any current CSR:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">kubectl delete csr/${HOSTNAME}-tls</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you have a CSR already, the agent will fail and log in to the journal (<code>journalctl -u stackable-agent</code>):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Sep 09 13:51:59 server1 stackable-agent[15457]: Caused by:
+Sep 09 13:51:59 server1 stackable-agent[15457]:     certificatesigningrequests.certificates.k8s.io "server1-tls" already exists: AlreadyExists</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Remove the current certificate file and restart the agent:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">sudo rm /etc/stackable/stackable-agent/secret/agent.crt &amp;&amp; \
+sudo systemctl restart stackable-agent</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And then observe the CSR is pending, with <code>kubectl get csr</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>NAME          AGE   SIGNERNAME                      REQUESTOR    CONDITION
+server1-tls   4s    kubernetes.io/kubelet-serving   kube:admin   Pending</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note the name of the CSR, and then this can be approved with:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">kubectl certificate approve server1-tls</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you need a list of pending CSRs for automation purposes, an example method is:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">kubectl get csr -o go-template='{{range .items}}{{if not .status}}{{.metadata.name}}{{"\n"}}{{end}}{{end}}'</code></pre>
+</div>
+</div>
+</div>
 </div>
 </article>
   </div>
