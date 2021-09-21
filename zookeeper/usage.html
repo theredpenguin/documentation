@@ -169,44 +169,19 @@
 apiVersion: zookeeper.stackable.tech/v1alpha1
 kind: ZookeeperCluster
 metadata:
-    name: simple
+  name: simple
 spec:
-    version: 3.5.8
-    servers:
-        roleGroups:
-            default:
-                selector:
-                    matchLabels:
-                        kubernetes.io/arch: stackable-linux
-                replicas: 1
-                config:
-                    metricsPort: 9505
+  version: 3.5.8
+  servers:
+    roleGroups:
+      default:
+        selector:
+          matchLabels:
+            kubernetes.io/arch: stackable-linux
+        replicas: 1
+        config:
+          metricsPort: 9505
 EOF</pre>
-</div>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-Due to <a href="https://github.com/stackabletech/zookeeper-operator/issues/176">#176</a> it is not currently possible to deploy a ZooKeeper cluster with a <em>selector</em> that matches more nodes than the value that was specified for <em>replicas</em>.
-The recommended workaround is to directly target the hosts which the ZooKeeper service should be rolled out to with a selector like the following:
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>selector:
-  matchExpressions:
-    - key: kubernetes.io/hostname
-      operator: In
-      values:
-      - worker-1.stackable.demo
-      - worker-2.stackable.demo
-      - worker-3.stackable.demo</pre>
 </div>
 </div>
 </article>
