@@ -1,7 +1,7 @@
 = [Worker Node Directories]
 The Stackable Engineers
 v0.1, 25.08.2021
-:status: [draft | rejected | accepted | deprecated | … | superseded by link:0005-example.md[ADR-0005]]
+:status: draft
 
 * Status: {status}
 * Deciders: [list everyone involved in the decision] <!-- optional -->
@@ -11,23 +11,53 @@ Technical Story: [description | ticket/issue URL] <!-- optional -->
 
 == Context and Problem Statement
 
-A number of directories are needed and used by different components of the Stackable solution. These directories are used for logs, secrets, configuration, user data and other stuff. 
-The question manifold, touching topics like coordination, identity and authentorization: Who should create, own, access and use which directories and when, in order to create a secure solution and accommodate the requirements of (enterprise) users. 
+A number of directories are needed and used by different components and processes of the Stackable solution on each worker node. These directories are used for logs, secrets, configuration, user data and other stuff. This document aims to set up rules and policies on handling these directories.  
+
+Topics like coordination, lifecycle, identity and authorization will be considered: Who should create, own, access and use which directories and when? Is there a clean up process? All this must take into account security and accommodate the requirements of (enterprise) users.
+
+Considerations in this document will focus on POSIX-style filesystems.
+
+We take all standard Linux directories as _given_, like "/", "/usr", "/opt", "/var/logs", etc. This document only deals with handling stackable specific subdirectories. 
+
+Therefore, a "directory" is comprised of the following information:
+
+* parent directory
+* directory name (determining the fully-qualified path together with parent dir's path)
+* owning user and group
+* assigned file system permissions
+* intended usage, like libraries, logs, executables, configuration
 
 == Decision Drivers <!-- optional -->
 
 * coordination: which process should when be allowed to create directories
-* identity: 
+* identity: which users & groups own and access a directory 
 * authorization: the "need-to-know" principle restricts the accessibility of information to the minimum 
 * users/customers: they might restrict acceptable directories, creating the need to flexibly configure directories 
-* shared access: two or more components might need to share a directory. one case is that multiple components share a common parent directory.  
-* sequentiality: some component might want to access a directory owned and created by another component. some component might needs to create a directory ahead of time which will be primarily used or owned by another component
+* shared access: two or more components or processes might need to share a directory. one case is that multiple components share a common parent directory.  
+* sequentiality: some component might want to access a directory owned and created by another component. some components might need to create a directory ahead of time which will be primarily used or owned by another component
 
 == Considered Options
 
-* components can create and use whatever directories they want
+=== Option 1: agent-controlled
+
+* a centralized component is responsible to provide directories and access to them: the agent
+* creation of directories is delegated to the agent through resource descriptions
+* agent is responsible for proactively create dirs and related users for components
+* agent receives dir configuration with all relevant information as part of a pod definition (hopefully) (needs research TICKET)
+* agent needs to be able to create users, for example ("kafka" component user), currently agent cannot do that (needs TICKET)
+    * component user needs to be strictly isolated to its directories
+* component with access to the dir will have the dir mounted as a pod volume mount, will r/w this way, e.g. using kubernetes host path
+* component specific 
+* components write /var/lib/kafka*
+* components can read, exe in /opt/stackable/packages/kafka-2.12.3/...
+
+=== Option 2: unrestricted components
+
+* components can create and use whatever directories they want (effectively run and behave as _root_)
+
+=== Option 3: no-share, component-controlled
+
 * components have private directories and sharing is the exception, however will be allowed on a per case basis 
-* a centralized component is responsible to provide directories and access to 
 * container-approach: every component will find symlinked directories in a dedicated directory structure and thus accesses shared directories
 
 == Decision Outcome
