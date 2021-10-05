@@ -43,7 +43,7 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">ADRs</span>
+    <span class="nav-text">Architectural Design Records</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
@@ -397,7 +397,7 @@ Metrics-server is running at https://127.0.0.1:6443/api/v1/namespaces/kube-syste
 </div>
 </div>
 <div class="paragraph">
-<p>Now that we have Kubernetes running on the controller node we need to distribute the configuration to the worker nodes. You’ll find a configuration file on your controller node in <code>/etc/rancher/k3s/k3s.yaml</code>. Edit this file and set the property named clusters&#8594;server to the address of your controller node (by default this is set to 127.0.0.1). Once you’ve done this you can distribute the file out to the cluster. Copy this file to <code>/root/.kube/config</code> on each of the worker nodes. One of the default locations for the Kubernetes configuration file is in the user&#8217;s home directory and the Stackable Agent will check here by default when running as root as required.</p>
+<p>Now that we have Kubernetes running on the controller node we need to distribute the configuration to the worker nodes. You’ll find a configuration file on your controller node in <code>/etc/rancher/k3s/k3s.yaml</code>. Edit this file and set the property named clusters&#8594;server to the address of your controller node (by default this is set to 127.0.0.1). Once you’ve done this you can distribute the file out to the cluster. Copy this file to <code>/root/.kube/config</code> on each of the nodes (controller and workers). One of the default locations for the Kubernetes configuration file is in the user&#8217;s home directory and the Stackable Agent will check here by default when running as root as required.</p>
 </div>
 </div>
 </div>
@@ -511,10 +511,10 @@ EOF</pre>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>curl -s -S https://raw.githubusercontent.com/stackabletech/zookeeper-operator/main/deploy/crd/zookeepercluster.crd.yaml | kubectl apply -f -
-curl -s -S https://raw.githubusercontent.com/stackabletech/kafka-operator/main/deploy/crd/kafkacluster.crd.yaml | kubectl apply -f -
-curl -s -S https://raw.githubusercontent.com/stackabletech/agent/main/deploy/crd/repository.crd.yaml | kubectl apply -f -
-curl -s -S https://raw.githubusercontent.com/stackabletech/nifi-operator/main/deploy/crd/nificluster.crd.yaml | kubectl apply -f -</pre>
+<pre>kubectl apply -f https://raw.githubusercontent.com/stackabletech/zookeeper-operator/main/deploy/crd/zookeepercluster.crd.yaml
+kubectl apply -f https://raw.githubusercontent.com/stackabletech/kafka-operator/main/deploy/crd/kafkacluster.crd.yaml
+kubectl apply -f https://raw.githubusercontent.com/stackabletech/agent/main/deploy/crd/repository.crd.yaml
+kubectl apply -f https://raw.githubusercontent.com/stackabletech/nifi-operator/main/deploy/crd/nificluster.crd.yaml</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -522,7 +522,7 @@ curl -s -S https://raw.githubusercontent.com/stackabletech/nifi-operator/main/de
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>root@kubernetes:~# curl -s -S https://raw.githubusercontent.com/stackabletech/zookeeper-operator/main/deploy/crd/zookeepercluster.crd.yaml | kubectl apply -f -
+<pre>root@kubernetes:~# kubectl apply -f https://raw.githubusercontent.com/stackabletech/zookeeper-operator/main/deploy/crd/zookeepercluster.crd.yaml
 customresourcedefinition.apiextensions.k8s.io/zookeeperclusters.zookeeper.stackable.tech created</pre>
 </div>
 </div>
@@ -531,6 +531,9 @@ customresourcedefinition.apiextensions.k8s.io/zookeeperclusters.zookeeper.stacka
 <h3 id="_configuring_the_stackable_os_package_repository"><a class="anchor" href="#_configuring_the_stackable_os_package_repository"></a>Configuring the Stackable OS package repository</h3>
 <div class="paragraph">
 <p>You will need to configure the Stackable OS package repository on the worker nodes. We’ll also take the opportunity to install OpenJDK Java 11 as well as this will be required by the Stackable services we will be running.</p>
+</div>
+<div class="paragraph">
+<p>Stackable supports running agents on Debian 10 "Buster", CentOS 7, and CentOS 8.</p>
 </div>
 <div class="sect3">
 <h4 id="_debian_and_ubuntu"><a class="anchor" href="#_debian_and_ubuntu"></a>Debian and Ubuntu</h4>
@@ -551,8 +554,8 @@ apt-get update</pre>
 /usr/bin/curl -s "https://keyserver.ubuntu.com/pks/lookup?op=get&amp;search=0xce45c7a0a3e41385acd4358916dd12f5c7a6d76a" &gt; /etc/pki/rpm-gpg/RPM-GPG-KEY-stackable
 /usr/bin/rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-stackable
 echo "[stackable]
-name=Stackable ${REPO_TYPE} repo
-baseurl=${REPO_URL}
+name=Stackable dev repo
+baseurl=https://repo.stackable.tech/repository/rpm-dev/el$releasever/
 enabled=1
 gpgcheck=0" &gt; /etc/yum.repos.d/stackable.repo
 /usr/bin/yum clean all</pre>
@@ -579,9 +582,9 @@ stackable-nifi-operator</pre>
 <h4 id="_red_hat_and_centos_2"><a class="anchor" href="#_red_hat_and_centos_2"></a>Red Hat and CentOS</h4>
 <div class="literalblock">
 <div class="content">
-<pre>yum install stackable-zookeeper-operator-server \
-stackable-kafka-operator-server \
-stackable-nifi-operator-server</pre>
+<pre>yum install stackable-zookeeper \
+stackable-kafka-operator \
+stackable-nifi-operator</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -592,8 +595,8 @@ stackable-nifi-operator-server</pre>
 <h4 id="_apache_zookeeper"><a class="anchor" href="#_apache_zookeeper"></a>Apache ZooKeeper</h4>
 <div class="literalblock">
 <div class="content">
-<pre>systemctl start stackable-zookeeper-operator-server
-systemctl enable stackable-zookeeper-operator-server</pre>
+<pre>systemctl start stackable-zookeeper-operator
+systemctl enable stackable-zookeeper-operator</pre>
 </div>
 </div>
 </div>
@@ -601,8 +604,8 @@ systemctl enable stackable-zookeeper-operator-server</pre>
 <h4 id="_apache_kafka"><a class="anchor" href="#_apache_kafka"></a>Apache Kafka</h4>
 <div class="literalblock">
 <div class="content">
-<pre>systemctl start stackable-kafka-operator-server
-systemctl enable stackable-kafka-operator-server</pre>
+<pre>systemctl start stackable-kafka-operator
+systemctl enable stackable-kafka-operator</pre>
 </div>
 </div>
 </div>
@@ -622,12 +625,12 @@ There’s an issue with the NiFi operator not looking in the correct place for i
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>systemctl start stackable-nifi-operator-server
-systemctl enable stackable-nifi-operator-server</pre>
+<pre>systemctl start stackable-nifi-operator
+systemctl enable stackable-nifi-operator</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You can use <code>systemctl status &lt;service-name&gt;</code> to check whether the services have started correctly. If they do not start then look in /var/log/syslog for any clues as to why.</p>
+<p>You can use <code>systemctl status &lt;service-name&gt;</code> to check whether the services have started correctly. If they do not start then look in <code>journalctl -fu &lt;service-name&gt;</code> for any clues as to why.</p>
 </div>
 </div>
 </div>
@@ -696,7 +699,7 @@ Environment="KUBECONFIG=/path/to/kubeconfig"</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>During the first start of the agent, it will perform some bootstrapping tasks, most notably it will generate a keypair and request a signed certificate from Kubernetes. You’ll see a message similar to this in /var/log/syslog.</p>
+<p>During the first start of the agent, it will perform some bootstrapping tasks, most notably it will generate a keypair and request a signed certificate from Kubernetes. You’ll see a message similar to this in <code>journalctl -fu stackable-agent</code>.</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -758,9 +761,25 @@ spec:
         replicas: 3
         config:
           adminPort: 12000
+          clientPort: 2181
           metricsPort: 9505
+          dataDir: /var/lib/zookeeper
+          initLimit: 5
+          syncLimit: 2
 EOF</pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Debian will automatically bind the computer&#8217;s hostname to 127.0.1.1, which causes ZooKeeper to only listen on the localhost interface. To prevent this, comment out the corresponding entry from /etc/hosts on each worker node.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
