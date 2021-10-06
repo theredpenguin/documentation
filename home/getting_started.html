@@ -300,7 +300,7 @@
 <p>Stackable requires a Kubernetes control plane to manage the cluster and one or more worker nodes to run the services themselves. We’ll build a simple cluster with 3 services; Apache ZooKeeper, Apache Kafka and Apache NiFi. For simplicity, we will deploy an instance of each of these services onto 3 separate nodes.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="/getting_started_arch.png" alt="High-level deployment architecture for Stackable" width="600"></span></p>
+<p><span class="image"><img src="_images/getting_started_arch.png" alt="High-level deployment architecture for Stackable" width="600"></span></p>
 </div>
 <div class="paragraph">
 <p>Since this is a walkthrough on how to install Stackable and we’re not building a production cluster, we can be fairly frugal with our resources. We’ll be using Ubuntu 20.04 running in VirtualBox in this walkthrough and recommend that you do the same as this will help you follow the instructions in this guide. It is assumed that you will know how to perform systems administration tasks such as configuring virtual machines, setting the hostnames and configuring name resolution. The virtual machines will require internet access to download the software.</p>
@@ -933,13 +933,13 @@ zkCli.sh</pre>
 <p>Apache NiFi provides a web interface and the easiest way to test it is to view this in a web browser. Browse to the address of one of your worker nodes on port 8080 e.f. <a href="http://node1.stackable:8080/nifi" class="bare">http://node1.stackable:8080/nifi</a> and you should see the NiFi Canvas.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="/nifi_menu.png" alt="The Apache NiFi web interface"></span></p>
+<p><span class="image"><img src="_images/nifi_menu.png" alt="The Apache NiFi web interface"></span></p>
 </div>
 <div class="paragraph">
 <p>Click on the menu and select Cluster as illustrated in the screenshot above and you&#8217;ll see that the 3 NiFi servers have been deployed as a cluster.</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="/nifi_cluster.png" alt="The Apache NiFi Cluster status screen"></span></p>
+<p><span class="image"><img src="_images/nifi_cluster.png" alt="The Apache NiFi Cluster status screen"></span></p>
 </div>
 </div>
 </div>
