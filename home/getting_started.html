@@ -757,7 +757,7 @@ spec:
       default:
         selector:
           matchLabels:
-            kubernetes.io/arch: stackable-linux
+            kubernetes.io/os: stackable-linux
         replicas: 3
         config:
           adminPort: 12000
@@ -806,7 +806,7 @@ spec:
       default:
         selector:
           matchLabels:
-            kubernetes.io/arch: stackable-linux
+            kubernetes.io/os: stackable-linux
         replicas: 3
         config:
           logDirs: "/tmp/kafka-logs"
@@ -839,7 +839,7 @@ spec:
       default:
         selector:
           matchLabels:
-            kubernetes.io/arch: stackable-linux
+            kubernetes.io/os: stackable-linux
         replicas: 3
         config:
           nifiWebHttpPort: 10000
