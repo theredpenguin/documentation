@@ -236,10 +236,10 @@ NOTE: Don’t install the agent onto the controller node as it is already has th
 ==== Red Hat and CentOS
     yum install stackable-agent
 
-Once installed, the agent configuration file is created in '/etc/stackable-agent/agent.conf'. If you have provided a kubeconfig for the root user in /root/.kube/config then the agent will use this, or you may specify where the config should be read from This can be done by adding a systemd drop-in file.. Put the following content in /usr/lib/systemd/system/stackable-agent.service.d/kubeconfig.conf:
+Once installed, the agent configuration file is created in '/etc/stackable-agent/agent.conf'. If you have provided a kubeconfig for the root user in /root/.kube/config then the agent will use this, or you may specify where the config should be read from This can be done by adding a systemd drop-in file.. Change the "Environment" entry fot the KUBECONFIG variable in file /usr/lib/systemd/system/stackable-agent.service to path (/root/.kube/config), where you have copied the config-file (k3s.yaml from the controller):
 
     [Service]
-    Environment="KUBECONFIG=/path/to/kubeconfig"
+    Environment="KUBECONFIG=/root/.kube/config"
 
 In most circumstances the Stackable Agent configuration file will be mostly empty. You can rely on the default settings in most cases.
 
@@ -256,7 +256,7 @@ During the first start of the agent, it will perform some bootstrapping tasks, m
 
     Aug 10 12:53:48 node1 stackable-agent[5208]: [2021-08-10T12:53:48Z INFO  stackable_agent] Successfully bootstrapped TLS certificate: TLS certificate requires manual approval. Run kubectl certificate approve node1.stackable-tls
 
-You will need to manually approve that certificate requests created by the agents before the agent can start. You can do this by running `kubectl certificate approve <agent-fqdn>-tls` on the controller node after starting the agent.
+You will need to manually approve that certificate requests created by the agents before the agent can start. You can do this by running `kubectl certificate approve <agent-fqdn>-tls` on the controller node after starting the agent. If kubectl is not available on the agent hosts, download k3s binary from https://github.com/k3s-io/k3s/releases, move the binary to /usr/local/bin and set a link (cd /usr/local/bin; ln -s ./k3s kubectl)
 
     root@kubernetes:~# kubectl certificate approve node1.stackable-tls
     certificatesigningrequest.certificates.k8s.io/node1.stackable-tls approved
